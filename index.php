@@ -15,4 +15,3 @@ if (isset($_GET['route']) === false){
     $controller->calculateFreedomAction();
 }
 
-echo "hier";
