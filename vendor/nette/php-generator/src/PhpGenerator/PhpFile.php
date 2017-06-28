@@ -5,9 +5,11 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 
+declare(strict_types=1);
+
 namespace Nette\PhpGenerator;
 
-use Nette\Object;
+use Nette;
 use Nette\Utils\Strings;
 
 
@@ -19,81 +21,16 @@ use Nette\Utils\Strings;
  * - doc comments
  * - one or more namespaces
  */
-class PhpFile extends Object
+final class PhpFile
 {
-	/** @var string[] */
-	private $documents = array();
+	use Nette\SmartObject;
+	use Traits\CommentAware;
 
 	/** @var PhpNamespace[] */
-	private $namespaces = array();
+	private $namespaces = [];
 
 
-	/**
-	 * @param  string|NULL
-	 * @return self
-	 */
-	public function setComment($val)
-	{
-		$this->documents = $val ? array((string) $val) : array();
-		return $this;
-	}
-
-
-	/**
-	 * @return string|NULL
-	 */
-	public function getComment()
-	{
-		return implode($this->documents) ?: NULL;
-	}
-
-
-	/**
-	 * @param  string
-	 * @return self
-	 */
-	public function addComment($val)
-	{
-		return $this->addDocument($val);
-	}
-
-
-	/**
-	 * @param  string[]
-	 * @return self
-	 */
-	public function setDocuments(array $documents)
-	{
-		$this->documents = $documents;
-		return $this;
-	}
-
-
-	/**
-	 * @return string[]
-	 */
-	public function getDocuments()
-	{
-		return $this->documents;
-	}
-
-
-	/**
-	 * @param  string
-	 * @return self
-	 */
-	public function addDocument($document)
-	{
-		$this->documents[] = $document;
-		return $this;
-	}
-
-
-	/**
-	 * @param  string
-	 * @return ClassType
-	 */
-	public function addClass($name)
+	public function addClass(string $name): ClassType
 	{
 		return $this
 			->addNamespace(Helpers::extractNamespace($name))
@@ -101,11 +38,7 @@ class PhpFile extends Object
 	}
 
 
-	/**
-	 * @param  string
-	 * @return ClassType
-	 */
-	public function addInterface($name)
+	public function addInterface(string $name): ClassType
 	{
 		return $this
 			->addNamespace(Helpers::extractNamespace($name))
@@ -113,11 +46,7 @@ class PhpFile extends Object
 	}
 
 
-	/**
-	 * @param  string
-	 * @return ClassType
-	 */
-	public function addTrait($name)
+	public function addTrait(string $name): ClassType
 	{
 		return $this
 			->addNamespace(Helpers::extractNamespace($name))
@@ -125,11 +54,7 @@ class PhpFile extends Object
 	}
 
 
-	/**
-	 * @param  string NULL means global namespace
-	 * @return PhpNamespace
-	 */
-	public function addNamespace($name)
+	public function addNamespace(string $name): PhpNamespace
 	{
 		if (!isset($this->namespaces[$name])) {
 			$this->namespaces[$name] = new PhpNamespace($name);
@@ -138,18 +63,15 @@ class PhpFile extends Object
 	}
 
 
-	/**
-	 * @return string PHP code
-	 */
-	public function __toString()
+	public function __toString(): string
 	{
 		foreach ($this->namespaces as $namespace) {
-			$namespace->setBracketedSyntax(count($this->namespaces) > 1 && isset($this->namespaces[NULL]));
+			$namespace->setBracketedSyntax(count($this->namespaces) > 1 && isset($this->namespaces['']));
 		}
 
 		return Strings::normalize(
 			"<?php\n"
-			. ($this->documents ? "\n" . str_replace("\n", "\n * ", "/**\n" . implode("\n", $this->documents)) . "\n */\n\n" : '')
+			. ($this->comment ? "\n" . Helpers::formatDocComment($this->comment . "\n") . "\n" : '')
 			. implode("\n\n", $this->namespaces)
 		) . "\n";
 	}

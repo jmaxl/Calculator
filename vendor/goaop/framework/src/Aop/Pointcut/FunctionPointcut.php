@@ -13,7 +13,6 @@ namespace Go\Aop\Pointcut;
 use ReflectionFunction;
 use Go\Aop\Pointcut;
 use Go\Aop\PointFilter;
-use TokenReflection\ReflectionFunction as ParsedReflectionFunction;
 
 /**
  * Signature method pointcut checks method signature (modifiers and name) to match it
@@ -65,8 +64,7 @@ class FunctionPointcut implements Pointcut
      */
     public function matches($function, $context = null, $instance = null, array $arguments = null)
     {
-        /** @var $function ReflectionFunction|ParsedReflectionFunction */
-        if (!$function instanceof ReflectionFunction && !$function instanceof ParsedReflectionFunction) {
+        if (!$function instanceof ReflectionFunction) {
             return false;
         }
 

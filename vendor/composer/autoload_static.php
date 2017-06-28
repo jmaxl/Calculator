@@ -7,13 +7,15 @@ namespace Composer\Autoload;
 class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
 {
     public static $files = array (
+        '7745382c92b7799bf1294b1f43023ba2' => __DIR__ . '/..' . '/tracy/tracy/src/shortcuts.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '1d1b89d124cc9cb8219922c9d5569199' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest.php',
-        '7745382c92b7799bf1294b1f43023ba2' => __DIR__ . '/..' . '/tracy/tracy/src/shortcuts.php',
         'a1d067aa2e53d6b47171c03cfc0ea5be' => __DIR__ . '/..' . '/nette/safe-stream/src/loader.php',
+        'e7a6fd2e7a869bb207158e9416bdd9b0' => __DIR__ . '/..' . '/nette/application/src/compatibility.php',
         '742b7e606e92b28dd726e835467f413a' => __DIR__ . '/..' . '/herrera-io/json/src/lib/json_version.php',
         'f0e9d233388e461ee3c460665eb265f0' => __DIR__ . '/..' . '/herrera-io/phar-update/src/lib/constants.php',
         '9d08842a2aa0dc42ee93aa591835610d' => __DIR__ . '/..' . '/kdyby/events/src/Doctrine/compatibility.php',
+        '950e8c5ec01dc90f029c243f73011631' => __DIR__ . '/..' . '/goaop/parser-reflection/src/bootstrap.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
     );
 
@@ -28,6 +30,10 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'W' => 
         array (
             'Webmozart\\Assert\\' => 17,
+        ),
+        'T' => 
+        array (
+            'Twig\\' => 5,
         ),
         'S' => 
         array (
@@ -47,6 +53,10 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
             'Ramsey\\Uuid\\Test\\' => 17,
             'Ramsey\\Uuid\\' => 12,
         ),
+        'P' => 
+        array (
+            'PhpParser\\' => 10,
+        ),
         'M' => 
         array (
             'Moontoast\\Math\\' => 15,
@@ -57,11 +67,13 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         ),
         'G' => 
         array (
+            'Go\\ParserReflection\\' => 20,
             'Go\\' => 3,
         ),
         'D' => 
         array (
             'Doctrine\\Instantiator\\' => 22,
+            'DeepCopy\\' => 9,
         ),
         'C' => 
         array (
@@ -96,6 +108,10 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'Twig\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/twig/twig/src',
         ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
@@ -145,6 +161,10 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
+        'PhpParser\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
+        ),
         'Moontoast\\Math\\' => 
         array (
             0 => __DIR__ . '/..' . '/moontoast/math/src/Moontoast/Math',
@@ -153,6 +173,10 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         array (
             0 => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema',
         ),
+        'Go\\ParserReflection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/goaop/parser-reflection/src',
+        ),
         'Go\\' => 
         array (
             0 => __DIR__ . '/..' . '/goaop/framework/src',
@@ -160,6 +184,10 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'Doctrine\\Instantiator\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/instantiator/src/Doctrine/Instantiator',
+        ),
+        'DeepCopy\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
         ),
         'Calculator\\' => 
         array (
@@ -174,6 +202,10 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
     public static $prefixesPsr0 = array (
         'T' => 
         array (
+            'Twig_' => 
+            array (
+                0 => __DIR__ . '/..' . '/twig/twig/lib',
+            ),
             'TokenReflection' => 
             array (
                 0 => __DIR__ . '/..' . '/andrewsville/php-token-reflection',
@@ -518,6 +550,7 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'Nette\\Application\\ApplicationException' => __DIR__ . '/..' . '/nette/application/src/Application/exceptions.php',
         'Nette\\Application\\BadRequestException' => __DIR__ . '/..' . '/nette/application/src/Application/exceptions.php',
         'Nette\\Application\\ForbiddenRequestException' => __DIR__ . '/..' . '/nette/application/src/Application/exceptions.php',
+        'Nette\\Application\\Helpers' => __DIR__ . '/..' . '/nette/application/src/Application/Helpers.php',
         'Nette\\Application\\IPresenter' => __DIR__ . '/..' . '/nette/application/src/Application/IPresenter.php',
         'Nette\\Application\\IPresenterFactory' => __DIR__ . '/..' . '/nette/application/src/Application/IPresenterFactory.php',
         'Nette\\Application\\IResponse' => __DIR__ . '/..' . '/nette/application/src/Application/IResponse.php',
@@ -537,6 +570,8 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'Nette\\Application\\Routers\\RouteList' => __DIR__ . '/..' . '/nette/application/src/Application/Routers/RouteList.php',
         'Nette\\Application\\Routers\\SimpleRouter' => __DIR__ . '/..' . '/nette/application/src/Application/Routers/SimpleRouter.php',
         'Nette\\Application\\UI\\BadSignalException' => __DIR__ . '/..' . '/nette/application/src/Application/UI/BadSignalException.php',
+        'Nette\\Application\\UI\\Component' => __DIR__ . '/..' . '/nette/application/src/Application/UI/Component.php',
+        'Nette\\Application\\UI\\ComponentReflection' => __DIR__ . '/..' . '/nette/application/src/Application/UI/ComponentReflection.php',
         'Nette\\Application\\UI\\Control' => __DIR__ . '/..' . '/nette/application/src/Application/UI/Control.php',
         'Nette\\Application\\UI\\Form' => __DIR__ . '/..' . '/nette/application/src/Application/UI/Form.php',
         'Nette\\Application\\UI\\IRenderable' => __DIR__ . '/..' . '/nette/application/src/Application/UI/IRenderable.php',
@@ -546,10 +581,9 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'Nette\\Application\\UI\\ITemplateFactory' => __DIR__ . '/..' . '/nette/application/src/Application/UI/ITemplateFactory.php',
         'Nette\\Application\\UI\\InvalidLinkException' => __DIR__ . '/..' . '/nette/application/src/Application/UI/InvalidLinkException.php',
         'Nette\\Application\\UI\\Link' => __DIR__ . '/..' . '/nette/application/src/Application/UI/Link.php',
+        'Nette\\Application\\UI\\MethodReflection' => __DIR__ . '/..' . '/nette/application/src/Application/UI/MethodReflection.php',
         'Nette\\Application\\UI\\Multiplier' => __DIR__ . '/..' . '/nette/application/src/Application/UI/Multiplier.php',
         'Nette\\Application\\UI\\Presenter' => __DIR__ . '/..' . '/nette/application/src/Application/UI/Presenter.php',
-        'Nette\\Application\\UI\\PresenterComponent' => __DIR__ . '/..' . '/nette/application/src/Application/UI/PresenterComponent.php',
-        'Nette\\Application\\UI\\PresenterComponentReflection' => __DIR__ . '/..' . '/nette/application/src/Application/UI/PresenterComponentReflection.php',
         'Nette\\ArgumentOutOfRangeException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\Bridges\\ApplicationDI\\ApplicationExtension' => __DIR__ . '/..' . '/nette/application/src/Bridges/ApplicationDI/ApplicationExtension.php',
         'Nette\\Bridges\\ApplicationDI\\LatteExtension' => __DIR__ . '/..' . '/nette/application/src/Bridges/ApplicationDI/LatteExtension.php',
@@ -557,6 +591,7 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'Nette\\Bridges\\ApplicationDI\\RoutingExtension' => __DIR__ . '/..' . '/nette/application/src/Bridges/ApplicationDI/RoutingExtension.php',
         'Nette\\Bridges\\ApplicationLatte\\ILatteFactory' => __DIR__ . '/..' . '/nette/application/src/Bridges/ApplicationLatte/ILatteFactory.php',
         'Nette\\Bridges\\ApplicationLatte\\Loader' => __DIR__ . '/..' . '/nette/application/src/Bridges/ApplicationLatte/Loader.php',
+        'Nette\\Bridges\\ApplicationLatte\\SnippetBridge' => __DIR__ . '/..' . '/nette/application/src/Bridges/ApplicationLatte/SnippetBridge.php',
         'Nette\\Bridges\\ApplicationLatte\\Template' => __DIR__ . '/..' . '/nette/application/src/Bridges/ApplicationLatte/Template.php',
         'Nette\\Bridges\\ApplicationLatte\\TemplateFactory' => __DIR__ . '/..' . '/nette/application/src/Bridges/ApplicationLatte/TemplateFactory.php',
         'Nette\\Bridges\\ApplicationLatte\\UIMacros' => __DIR__ . '/..' . '/nette/application/src/Bridges/ApplicationLatte/UIMacros.php',
@@ -571,13 +606,11 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'Nette\\Bridges\\HttpTracy\\SessionPanel' => __DIR__ . '/..' . '/nette/http/src/Bridges/HttpTracy/SessionPanel.php',
         'Nette\\Bridges\\MailDI\\MailExtension' => __DIR__ . '/..' . '/nette/mail/src/Bridges/MailDI/MailExtension.php',
         'Nette\\Bridges\\ReflectionDI\\ReflectionExtension' => __DIR__ . '/..' . '/nette/reflection/src/Bridges/ReflectionDI/ReflectionExtension.php',
-        'Nette\\Bridges\\SecurityDI\\SecurityExtension' => __DIR__ . '/..' . '/nette/security/src/Bridges/SecurityDI/SecurityExtension.php',
-        'Nette\\Bridges\\SecurityTracy\\UserPanel' => __DIR__ . '/..' . '/nette/security/src/Bridges/SecurityTracy/UserPanel.php',
         'Nette\\Caching\\Cache' => __DIR__ . '/..' . '/nette/caching/src/Caching/Cache.php',
+        'Nette\\Caching\\IBulkReader' => __DIR__ . '/..' . '/nette/caching/src/Caching/IBulkReader.php',
         'Nette\\Caching\\IStorage' => __DIR__ . '/..' . '/nette/caching/src/Caching/IStorage.php',
         'Nette\\Caching\\OutputHelper' => __DIR__ . '/..' . '/nette/caching/src/Caching/OutputHelper.php',
         'Nette\\Caching\\Storages\\DevNullStorage' => __DIR__ . '/..' . '/nette/caching/src/Caching/Storages/DevNullStorage.php',
-        'Nette\\Caching\\Storages\\FileJournal' => __DIR__ . '/..' . '/nette/caching/src/Caching/Storages/FileJournal.php',
         'Nette\\Caching\\Storages\\FileStorage' => __DIR__ . '/..' . '/nette/caching/src/Caching/Storages/FileStorage.php',
         'Nette\\Caching\\Storages\\IJournal' => __DIR__ . '/..' . '/nette/caching/src/Caching/Storages/IJournal.php',
         'Nette\\Caching\\Storages\\MemcachedStorage' => __DIR__ . '/..' . '/nette/caching/src/Caching/Storages/MemcachedStorage.php',
@@ -601,8 +634,8 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'Nette\\DI\\Config\\Loader' => __DIR__ . '/..' . '/nette/di/src/DI/Config/Loader.php',
         'Nette\\DI\\Container' => __DIR__ . '/..' . '/nette/di/src/DI/Container.php',
         'Nette\\DI\\ContainerBuilder' => __DIR__ . '/..' . '/nette/di/src/DI/ContainerBuilder.php',
-        'Nette\\DI\\ContainerFactory' => __DIR__ . '/..' . '/nette/di/src/DI/ContainerFactory.php',
         'Nette\\DI\\ContainerLoader' => __DIR__ . '/..' . '/nette/di/src/DI/ContainerLoader.php',
+        'Nette\\DI\\DependencyChecker' => __DIR__ . '/..' . '/nette/di/src/DI/DependencyChecker.php',
         'Nette\\DI\\Extensions\\ConstantsExtension' => __DIR__ . '/..' . '/nette/di/src/DI/Extensions/ConstantsExtension.php',
         'Nette\\DI\\Extensions\\DIExtension' => __DIR__ . '/..' . '/nette/di/src/DI/Extensions/DIExtension.php',
         'Nette\\DI\\Extensions\\DecoratorExtension' => __DIR__ . '/..' . '/nette/di/src/DI/Extensions/DecoratorExtension.php',
@@ -611,6 +644,7 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'Nette\\DI\\Extensions\\PhpExtension' => __DIR__ . '/..' . '/nette/di/src/DI/Extensions/PhpExtension.php',
         'Nette\\DI\\Helpers' => __DIR__ . '/..' . '/nette/di/src/DI/Helpers.php',
         'Nette\\DI\\MissingServiceException' => __DIR__ . '/..' . '/nette/di/src/DI/exceptions.php',
+        'Nette\\DI\\PhpGenerator' => __DIR__ . '/..' . '/nette/di/src/DI/PhpGenerator.php',
         'Nette\\DI\\PhpReflection' => __DIR__ . '/..' . '/nette/di/src/DI/PhpReflection.php',
         'Nette\\DI\\ServiceCreationException' => __DIR__ . '/..' . '/nette/di/src/DI/exceptions.php',
         'Nette\\DI\\ServiceDefinition' => __DIR__ . '/..' . '/nette/di/src/DI/ServiceDefinition.php',
@@ -641,6 +675,8 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'Nette\\Iterators\\RecursiveFilter' => __DIR__ . '/..' . '/nette/utils/src/Iterators/RecursiveFilter.php',
         'Nette\\Loaders\\RobotLoader' => __DIR__ . '/..' . '/nette/robot-loader/src/RobotLoader/RobotLoader.php',
         'Nette\\Localization\\ITranslator' => __DIR__ . '/..' . '/nette/utils/src/Utils/ITranslator.php',
+        'Nette\\Mail\\FallbackMailer' => __DIR__ . '/..' . '/nette/mail/src/Mail/FallbackMailer.php',
+        'Nette\\Mail\\FallbackMailerException' => __DIR__ . '/..' . '/nette/mail/src/Mail/exceptions.php',
         'Nette\\Mail\\IMailer' => __DIR__ . '/..' . '/nette/mail/src/Mail/IMailer.php',
         'Nette\\Mail\\Message' => __DIR__ . '/..' . '/nette/mail/src/Mail/Message.php',
         'Nette\\Mail\\MimePart' => __DIR__ . '/..' . '/nette/mail/src/Mail/MimePart.php',
@@ -659,6 +695,10 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'Nette\\Object' => __DIR__ . '/..' . '/nette/utils/src/Utils/Object.php',
         'Nette\\OutOfRangeException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\PhpGenerator\\ClassType' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/ClassType.php',
+        'Nette\\PhpGenerator\\Closure' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/Closure.php',
+        'Nette\\PhpGenerator\\Constant' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/Constant.php',
+        'Nette\\PhpGenerator\\Factory' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/Factory.php',
+        'Nette\\PhpGenerator\\GlobalFunction' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/GlobalFunction.php',
         'Nette\\PhpGenerator\\Helpers' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/Helpers.php',
         'Nette\\PhpGenerator\\Method' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/Method.php',
         'Nette\\PhpGenerator\\Parameter' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/Parameter.php',
@@ -666,6 +706,10 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'Nette\\PhpGenerator\\PhpLiteral' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/PhpLiteral.php',
         'Nette\\PhpGenerator\\PhpNamespace' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/PhpNamespace.php',
         'Nette\\PhpGenerator\\Property' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/Property.php',
+        'Nette\\PhpGenerator\\Traits\\CommentAware' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/Traits/CommentAware.php',
+        'Nette\\PhpGenerator\\Traits\\FunctionLike' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/Traits/FunctionLike.php',
+        'Nette\\PhpGenerator\\Traits\\NameAware' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/Traits/NameAware.php',
+        'Nette\\PhpGenerator\\Traits\\VisibilityAware' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/Traits/VisibilityAware.php',
         'Nette\\Reflection\\Annotation' => __DIR__ . '/..' . '/nette/reflection/src/Reflection/Annotation.php',
         'Nette\\Reflection\\AnnotationsParser' => __DIR__ . '/..' . '/nette/reflection/src/Reflection/AnnotationsParser.php',
         'Nette\\Reflection\\ClassType' => __DIR__ . '/..' . '/nette/reflection/src/Reflection/ClassType.php',
@@ -676,18 +720,8 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'Nette\\Reflection\\Method' => __DIR__ . '/..' . '/nette/reflection/src/Reflection/Method.php',
         'Nette\\Reflection\\Parameter' => __DIR__ . '/..' . '/nette/reflection/src/Reflection/Parameter.php',
         'Nette\\Reflection\\Property' => __DIR__ . '/..' . '/nette/reflection/src/Reflection/Property.php',
-        'Nette\\Security\\AuthenticationException' => __DIR__ . '/..' . '/nette/security/src/Security/AuthenticationException.php',
-        'Nette\\Security\\IAuthenticator' => __DIR__ . '/..' . '/nette/security/src/Security/IAuthenticator.php',
-        'Nette\\Security\\IAuthorizator' => __DIR__ . '/..' . '/nette/security/src/Security/IAuthorizator.php',
-        'Nette\\Security\\IIdentity' => __DIR__ . '/..' . '/nette/security/src/Security/IIdentity.php',
-        'Nette\\Security\\IResource' => __DIR__ . '/..' . '/nette/security/src/Security/IResource.php',
-        'Nette\\Security\\IRole' => __DIR__ . '/..' . '/nette/security/src/Security/IRole.php',
-        'Nette\\Security\\IUserStorage' => __DIR__ . '/..' . '/nette/security/src/Security/IUserStorage.php',
-        'Nette\\Security\\Identity' => __DIR__ . '/..' . '/nette/security/src/Security/Identity.php',
-        'Nette\\Security\\Passwords' => __DIR__ . '/..' . '/nette/security/src/Security/Passwords.php',
-        'Nette\\Security\\Permission' => __DIR__ . '/..' . '/nette/security/src/Security/Permission.php',
-        'Nette\\Security\\SimpleAuthenticator' => __DIR__ . '/..' . '/nette/security/src/Security/SimpleAuthenticator.php',
-        'Nette\\Security\\User' => __DIR__ . '/..' . '/nette/security/src/Security/User.php',
+        'Nette\\SmartObject' => __DIR__ . '/..' . '/nette/utils/src/Utils/SmartObject.php',
+        'Nette\\StaticClass' => __DIR__ . '/..' . '/nette/utils/src/Utils/StaticClass.php',
         'Nette\\StaticClassException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\UnexpectedValueException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\Utils\\ArrayHash' => __DIR__ . '/..' . '/nette/utils/src/Utils/ArrayHash.php',
@@ -695,7 +729,6 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'Nette\\Utils\\Arrays' => __DIR__ . '/..' . '/nette/utils/src/Utils/Arrays.php',
         'Nette\\Utils\\AssertionException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\Utils\\Callback' => __DIR__ . '/..' . '/nette/utils/src/Utils/Callback.php',
-        'Nette\\Utils\\CallbackFilterIterator' => __DIR__ . '/..' . '/nette/finder/src/Finder/CallbackFilterIterator.php',
         'Nette\\Utils\\DateTime' => __DIR__ . '/..' . '/nette/utils/src/Utils/DateTime.php',
         'Nette\\Utils\\FileSystem' => __DIR__ . '/..' . '/nette/utils/src/Utils/FileSystem.php',
         'Nette\\Utils\\Finder' => __DIR__ . '/..' . '/nette/finder/src/Finder/Finder.php',
@@ -708,7 +741,7 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'Nette\\Utils\\ObjectMixin' => __DIR__ . '/..' . '/nette/utils/src/Utils/ObjectMixin.php',
         'Nette\\Utils\\Paginator' => __DIR__ . '/..' . '/nette/utils/src/Utils/Paginator.php',
         'Nette\\Utils\\Random' => __DIR__ . '/..' . '/nette/utils/src/Utils/Random.php',
-        'Nette\\Utils\\RecursiveCallbackFilterIterator' => __DIR__ . '/..' . '/nette/finder/src/Finder/RecursiveCallbackFilterIterator.php',
+        'Nette\\Utils\\Reflection' => __DIR__ . '/..' . '/nette/utils/src/Utils/Reflection.php',
         'Nette\\Utils\\RegexpException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\Utils\\Strings' => __DIR__ . '/..' . '/nette/utils/src/Utils/Strings.php',
         'Nette\\Utils\\UnknownImageFileException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
@@ -731,13 +764,6 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'PEAR_Sniffs_WhiteSpace_ObjectOperatorIndentSniff' => __DIR__ . '/..' . '/squizlabs/php_codesniffer/CodeSniffer/Standards/PEAR/Sniffs/WhiteSpace/ObjectOperatorIndentSniff.php',
         'PEAR_Sniffs_WhiteSpace_ScopeClosingBraceSniff' => __DIR__ . '/..' . '/squizlabs/php_codesniffer/CodeSniffer/Standards/PEAR/Sniffs/WhiteSpace/ScopeClosingBraceSniff.php',
         'PEAR_Sniffs_WhiteSpace_ScopeIndentSniff' => __DIR__ . '/..' . '/squizlabs/php_codesniffer/CodeSniffer/Standards/PEAR/Sniffs/WhiteSpace/ScopeIndentSniff.php',
-        'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/Assert.php',
-        'PHPUnit\\Framework\\AssertionFailedError' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/AssertionFailedError.php',
-        'PHPUnit\\Framework\\BaseTestListener' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/BaseTestListener.php',
-        'PHPUnit\\Framework\\Test' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/Test.php',
-        'PHPUnit\\Framework\\TestCase' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/TestCase.php',
-        'PHPUnit\\Framework\\TestListener' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/TestListener.php',
-        'PHPUnit\\Framework\\TestSuite' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/TestSuite.php',
         'PHPUnit_Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit_Extensions_GroupTestSuite' => __DIR__ . '/..' . '/phpunit/phpunit/src/Extensions/GroupTestSuite.php',
         'PHPUnit_Extensions_PhptTestCase' => __DIR__ . '/..' . '/phpunit/phpunit/src/Extensions/PhptTestCase.php',
@@ -769,9 +795,12 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'PHPUnit_Framework_Constraint_IsEmpty' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Constraint/IsEmpty.php',
         'PHPUnit_Framework_Constraint_IsEqual' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Constraint/IsEqual.php',
         'PHPUnit_Framework_Constraint_IsFalse' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Constraint/IsFalse.php',
+        'PHPUnit_Framework_Constraint_IsFinite' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Constraint/IsFinite.php',
         'PHPUnit_Framework_Constraint_IsIdentical' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Constraint/IsIdentical.php',
+        'PHPUnit_Framework_Constraint_IsInfinite' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Constraint/IsInfinite.php',
         'PHPUnit_Framework_Constraint_IsInstanceOf' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Constraint/IsInstanceOf.php',
         'PHPUnit_Framework_Constraint_IsJson' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Constraint/IsJson.php',
+        'PHPUnit_Framework_Constraint_IsNan' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Constraint/IsNan.php',
         'PHPUnit_Framework_Constraint_IsNull' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Constraint/IsNull.php',
         'PHPUnit_Framework_Constraint_IsTrue' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Constraint/IsTrue.php',
         'PHPUnit_Framework_Constraint_IsType' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Constraint/IsType.php',
@@ -790,6 +819,7 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'PHPUnit_Framework_Constraint_TraversableContains' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Constraint/TraversableContains.php',
         'PHPUnit_Framework_Constraint_TraversableContainsOnly' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Constraint/TraversableContainsOnly.php',
         'PHPUnit_Framework_Constraint_Xor' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Constraint/Xor.php',
+        'PHPUnit_Framework_CoveredCodeNotExecutedException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/PHPUnit_Framework_CoveredCodeNotExecutedException.php',
         'PHPUnit_Framework_Error' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Error.php',
         'PHPUnit_Framework_Error_Deprecated' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Error/Deprecated.php',
         'PHPUnit_Framework_Error_Notice' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Error/Notice.php',
@@ -800,8 +830,8 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'PHPUnit_Framework_IncompleteTest' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/IncompleteTest.php',
         'PHPUnit_Framework_IncompleteTestCase' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/IncompleteTestCase.php',
         'PHPUnit_Framework_IncompleteTestError' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/IncompleteTestError.php',
-        'PHPUnit_Framework_InvalidCoversTargetError' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/InvalidCoversTargetError.php',
         'PHPUnit_Framework_InvalidCoversTargetException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/InvalidCoversTargetException.php',
+        'PHPUnit_Framework_MissingCoversAnnotationException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/PHPUnit_Framework_MissingCoversAnnotationException.php',
         'PHPUnit_Framework_MockObject_BadMethodCallException' => __DIR__ . '/..' . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Exception/BadMethodCallException.php',
         'PHPUnit_Framework_MockObject_Builder_Identity' => __DIR__ . '/..' . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Builder/Identity.php',
         'PHPUnit_Framework_MockObject_Builder_InvocationMocker' => __DIR__ . '/..' . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Builder/InvocationMocker.php',
@@ -862,6 +892,7 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'PHPUnit_Framework_TestSuite_DataProvider' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/TestSuite/DataProvider.php',
         'PHPUnit_Framework_UnintentionallyCoveredCodeError' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/UnintentionallyCoveredCodeError.php',
         'PHPUnit_Framework_Warning' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Warning.php',
+        'PHPUnit_Framework_WarningTestCase' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/WarningTestCase.php',
         'PHPUnit_Runner_BaseTestRunner' => __DIR__ . '/..' . '/phpunit/phpunit/src/Runner/BaseTestRunner.php',
         'PHPUnit_Runner_Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Runner/Exception.php',
         'PHPUnit_Runner_Filter_Factory' => __DIR__ . '/..' . '/phpunit/phpunit/src/Runner/Filter/Factory.php',
@@ -877,6 +908,7 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'PHPUnit_TextUI_TestRunner' => __DIR__ . '/..' . '/phpunit/phpunit/src/TextUI/TestRunner.php',
         'PHPUnit_Util_Blacklist' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Blacklist.php',
         'PHPUnit_Util_Configuration' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Configuration.php',
+        'PHPUnit_Util_ConfigurationGenerator' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/ConfigurationGenerator.php',
         'PHPUnit_Util_ErrorHandler' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/ErrorHandler.php',
         'PHPUnit_Util_Fileloader' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Fileloader.php',
         'PHPUnit_Util_Filesystem' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Filesystem.php',
@@ -887,6 +919,7 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'PHPUnit_Util_Log_JSON' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Log/JSON.php',
         'PHPUnit_Util_Log_JUnit' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Log/JUnit.php',
         'PHPUnit_Util_Log_TAP' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Log/TAP.php',
+        'PHPUnit_Util_Log_TeamCity' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Log/TeamCity.php',
         'PHPUnit_Util_PHP' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/PHP.php',
         'PHPUnit_Util_PHP_Default' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/PHP/Default.php',
         'PHPUnit_Util_PHP_Windows' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/PHP/Windows.php',
@@ -902,13 +935,15 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'PHPUnit_Util_Type' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Type.php',
         'PHPUnit_Util_XML' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/XML.php',
         'PHP_CodeCoverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage.php',
+        'PHP_CodeCoverage_CoveredCodeNotExecutedException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Exception/CoveredCodeNotExecutedException.php',
         'PHP_CodeCoverage_Driver' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Driver.php',
         'PHP_CodeCoverage_Driver_HHVM' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Driver/HHVM.php',
         'PHP_CodeCoverage_Driver_PHPDBG' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Driver/PHPDBG.php',
         'PHP_CodeCoverage_Driver_Xdebug' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Driver/Xdebug.php',
-        'PHP_CodeCoverage_Exception' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Exception.php',
-        'PHP_CodeCoverage_Exception_UnintentionallyCoveredCode' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Exception/UnintentionallyCoveredCode.php',
+        'PHP_CodeCoverage_Exception' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Exception/Exception.php',
         'PHP_CodeCoverage_Filter' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Filter.php',
+        'PHP_CodeCoverage_InvalidArgumentException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Exception/InvalidArgumentException.php',
+        'PHP_CodeCoverage_MissingCoversAnnotationException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Exception/MissingCoversAnnotationException.php',
         'PHP_CodeCoverage_Report_Clover' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Report/Clover.php',
         'PHP_CodeCoverage_Report_Crap4j' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Report/Crap4j.php',
         'PHP_CodeCoverage_Report_Factory' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Report/Factory.php',
@@ -934,8 +969,9 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'PHP_CodeCoverage_Report_XML_Project' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Report/XML/Project.php',
         'PHP_CodeCoverage_Report_XML_Tests' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Report/XML/Tests.php',
         'PHP_CodeCoverage_Report_XML_Totals' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Report/XML/Totals.php',
+        'PHP_CodeCoverage_RuntimeException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Exception/RuntimeException.php',
+        'PHP_CodeCoverage_UnintentionallyCoveredCodeException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Exception/UnintentionallyCoveredCodeException.php',
         'PHP_CodeCoverage_Util' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Util.php',
-        'PHP_CodeCoverage_Util_InvalidArgumentHelper' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage/Util/InvalidArgumentHelper.php',
         'PHP_CodeSniffer' => __DIR__ . '/..' . '/squizlabs/php_codesniffer/CodeSniffer.php',
         'PHP_CodeSniffer_CLI' => __DIR__ . '/..' . '/squizlabs/php_codesniffer/CodeSniffer/CLI.php',
         'PHP_CodeSniffer_DocGenerators_Generator' => __DIR__ . '/..' . '/squizlabs/php_codesniffer/CodeSniffer/DocGenerators/Generator.php',
@@ -1189,6 +1225,7 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'PSR2_Sniffs_Methods_MethodDeclarationSniff' => __DIR__ . '/..' . '/squizlabs/php_codesniffer/CodeSniffer/Standards/PSR2/Sniffs/Methods/MethodDeclarationSniff.php',
         'PSR2_Sniffs_Namespaces_NamespaceDeclarationSniff' => __DIR__ . '/..' . '/squizlabs/php_codesniffer/CodeSniffer/Standards/PSR2/Sniffs/Namespaces/NamespaceDeclarationSniff.php',
         'PSR2_Sniffs_Namespaces_UseDeclarationSniff' => __DIR__ . '/..' . '/squizlabs/php_codesniffer/CodeSniffer/Standards/PSR2/Sniffs/Namespaces/UseDeclarationSniff.php',
+        'SebastianBergmann\\CodeUnitReverseLookup\\Wizard' => __DIR__ . '/..' . '/sebastian/code-unit-reverse-lookup/src/Wizard.php',
         'SebastianBergmann\\Comparator\\ArrayComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/ArrayComparator.php',
         'SebastianBergmann\\Comparator\\Comparator' => __DIR__ . '/..' . '/sebastian/comparator/src/Comparator.php',
         'SebastianBergmann\\Comparator\\ComparisonFailure' => __DIR__ . '/..' . '/sebastian/comparator/src/ComparisonFailure.php',
@@ -1221,9 +1258,13 @@ class ComposerStaticInitdcd74c72f8d472c99940db6ce857a549
         'SebastianBergmann\\GlobalState\\Restorer' => __DIR__ . '/..' . '/sebastian/global-state/src/Restorer.php',
         'SebastianBergmann\\GlobalState\\RuntimeException' => __DIR__ . '/..' . '/sebastian/global-state/src/RuntimeException.php',
         'SebastianBergmann\\GlobalState\\Snapshot' => __DIR__ . '/..' . '/sebastian/global-state/src/Snapshot.php',
+        'SebastianBergmann\\ObjectEnumerator\\Enumerator' => __DIR__ . '/..' . '/sebastian/object-enumerator/src/Enumerator.php',
+        'SebastianBergmann\\ObjectEnumerator\\Exception' => __DIR__ . '/..' . '/sebastian/object-enumerator/src/Exception.php',
+        'SebastianBergmann\\ObjectEnumerator\\InvalidArgumentException' => __DIR__ . '/..' . '/sebastian/object-enumerator/src/InvalidArgumentException.php',
         'SebastianBergmann\\RecursionContext\\Context' => __DIR__ . '/..' . '/sebastian/recursion-context/src/Context.php',
         'SebastianBergmann\\RecursionContext\\Exception' => __DIR__ . '/..' . '/sebastian/recursion-context/src/Exception.php',
         'SebastianBergmann\\RecursionContext\\InvalidArgumentException' => __DIR__ . '/..' . '/sebastian/recursion-context/src/InvalidArgumentException.php',
+        'SebastianBergmann\\ResourceOperations\\ResourceOperations' => __DIR__ . '/..' . '/sebastian/resource-operations/src/ResourceOperations.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
         'Squiz_Sniffs_Arrays_ArrayBracketSpacingSniff' => __DIR__ . '/..' . '/squizlabs/php_codesniffer/CodeSniffer/Standards/Squiz/Sniffs/Arrays/ArrayBracketSpacingSniff.php',
         'Squiz_Sniffs_Arrays_ArrayDeclarationSniff' => __DIR__ . '/..' . '/squizlabs/php_codesniffer/CodeSniffer/Standards/Squiz/Sniffs/Arrays/ArrayDeclarationSniff.php',

@@ -15,6 +15,7 @@ use Nette;
  */
 class FileSystem
 {
+	use Nette\StaticClass;
 
 	/**
 	 * Creates a directory.
@@ -24,8 +25,7 @@ class FileSystem
 	public static function createDir($dir, $mode = 0777)
 	{
 		if (!is_dir($dir) && !@mkdir($dir, $mode, TRUE) && !is_dir($dir)) { // @ - dir may already exist
-			$error = error_get_last();
-			throw new Nette\IOException("Unable to create directory '$dir'. $error[message]");
+			throw new Nette\IOException("Unable to create directory '$dir'. " . error_get_last()['message']);
 		}
 	}
 
@@ -46,13 +46,13 @@ class FileSystem
 		} elseif (is_dir($source)) {
 			static::createDir($dest);
 			foreach (new \FilesystemIterator($dest) as $item) {
-				static::delete($item);
+				static::delete($item->getPathname());
 			}
 			foreach ($iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($source, \RecursiveDirectoryIterator::SKIP_DOTS), \RecursiveIteratorIterator::SELF_FIRST) as $item) {
 				if ($item->isDir()) {
 					static::createDir($dest . '/' . $iterator->getSubPathName());
 				} else {
-					static::copy($item, $dest . '/' . $iterator->getSubPathName());
+					static::copy($item->getPathname(), $dest . '/' . $iterator->getSubPathName());
 				}
 			}
 
@@ -80,7 +80,7 @@ class FileSystem
 
 		} elseif (is_dir($path)) {
 			foreach (new \FilesystemIterator($path) as $item) {
-				static::delete($item);
+				static::delete($item->getPathname());
 			}
 			if (!@rmdir($path)) { // @ is escalated to exception
 				throw new Nette\IOException("Unable to delete directory '$path'.");

@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'TokenReflection' => array($vendorDir . '/andrewsville/php-token-reflection'),
     'Symfony\\Component\\OptionsResolver\\' => array($vendorDir . '/symfony/options-resolver'),
     'SecurityLib' => array($vendorDir . '/ircmaxell/security-lib/lib'),

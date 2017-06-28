@@ -16,9 +16,8 @@ use Go\Aop\Intercept\FunctionInvocation;
 use Go\Core\AspectContainer;
 use Go\Core\AspectKernel;
 use Go\Core\LazyAdvisorAccessor;
+use Go\ParserReflection\ReflectionFileNamespace;
 use ReflectionFunction;
-use ReflectionParameter;
-use TokenReflection\ReflectionFileNamespace;
 
 /**
  * Function proxy builder that is used to generate a proxy-function from the list of joinpoints
@@ -150,41 +149,6 @@ class FunctionProxy extends AbstractProxy
     }
 
     /**
-     * Creates a function code from Reflection
-     *
-     * @param ReflectionFunction $function Reflection for function
-     * @param string $body Body of function
-     *
-     * @return string
-     */
-    protected function getOverriddenFunction(ReflectionFunction $function, $body)
-    {
-        static $inMemoryCache = [];
-
-        $functionName = $function->getName();
-        if (isset($inMemoryCache[$functionName])) {
-            return $inMemoryCache[$functionName];
-        }
-
-        $code = (
-            preg_replace('/ {4}|\t/', '', $function->getDocComment()) . "\n" . // Original doc-comment
-            'function ' . // 'function' keyword
-            ($function->returnsReference() ? '&' : '') . // By reference symbol
-            $functionName . // Function name
-            '(' . // Start of parameters
-            join(', ', $this->getParameters($function->getParameters())) . // List of parameters
-            ")\n" . // End of parameters
-            "{\n" . // Start of function body
-            $this->indent($body) . "\n" . // Body of function
-            "}\n" // End of function body
-        );
-
-        $inMemoryCache[$functionName] = $code;
-
-        return $code;
-    }
-
-    /**
      * Creates definition for trait method body
      *
      * @param ReflectionFunction $function Method reflection
@@ -195,33 +159,15 @@ class FunctionProxy extends AbstractProxy
     {
         $class = '\\' . __CLASS__;
 
-        $dynamicArgs   = false;
-        $hasOptionals  = false;
-        $hasReferences = false;
+        $args = $this->prepareArgsLine($function);
 
-        $argValues = array_map(function(ReflectionParameter $param) use (&$dynamicArgs, &$hasOptionals, &$hasReferences) {
-            $byReference   = $param->isPassedByReference();
-            $dynamicArg    = $param->name == '...';
-            $dynamicArgs   = $dynamicArgs || $dynamicArg;
-            $hasOptionals  = $hasOptionals || ($param->isOptional() && !$param->isDefaultValueAvailable());
-            $hasReferences = $hasReferences || $byReference;
-
-            return ($byReference ? '&' : '') . '$' . $param->name;
-        }, $function->getParameters());
-
-        if ($dynamicArgs) {
-            // Remove last '...' argument
-            array_pop($argValues);
-        }
-
-        $args = join(', ', $argValues);
-
-        if ($dynamicArgs) {
-            $args = $hasReferences ? "[$args] + \\func_get_args()" : '\func_get_args()';
-        } elseif ($hasOptionals) {
-            $args = "\\array_slice([$args], 0, \\func_num_args())";
-        } else {
-            $args = "[$args]";
+        $return = 'return ';
+        if (PHP_VERSION_ID >= 70100 && $function->hasReturnType()) {
+            $returnType = (string) $function->getReturnType();
+            if ($returnType === 'void') {
+                // void return types should not return anything
+                $return = '';
+            }
         }
 
         return <<<BODY
@@ -229,7 +175,7 @@ static \$__joinPoint = null;
 if (!\$__joinPoint) {
     \$__joinPoint = {$class}::getJoinPoint('{$function->name}', __NAMESPACE__);
 }
-return \$__joinPoint->__invoke($args);
+{$return}\$__joinPoint->__invoke($args);
 BODY;
     }
 

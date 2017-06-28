@@ -11,7 +11,7 @@
 namespace Go\Aop\Support;
 
 use Go\Aop\PointFilter;
-use TokenReflection\ReflectionFileNamespace as ParsedReflectionFileNamespace;
+use Go\ParserReflection\ReflectionFileNamespace;
 
 /**
  * Simple namespace matcher that match only specific namespace name
@@ -54,13 +54,13 @@ class SimpleNamespaceFilter implements PointFilter
 
     /**
      * {@inheritdoc}
-     * @param ParsedReflectionFileNamespace|string $ns
+     * @param ReflectionFileNamespace|string $ns
      */
     public function matches($ns, $context = null, $instance = null, array $arguments = null)
     {
         $isNamespaceIsObject = ($ns === (object) $ns);
 
-        if ($isNamespaceIsObject && !$ns instanceof ParsedReflectionFileNamespace) {
+        if ($isNamespaceIsObject && !$ns instanceof ReflectionFileNamespace) {
             return false;
         }
 

@@ -13,7 +13,6 @@ namespace Go\Core;
 use Go\Aop\Features;
 use Go\Instrument\ClassLoading\AopComposerLoader;
 use Go\Instrument\ClassLoading\SourceTransformingLoader;
-use Go\Instrument\CleanableMemory;
 use Go\Instrument\PathResolver;
 use Go\Instrument\Transformer\ConstructorExecutionTransformer;
 use Go\Instrument\Transformer\SourceTransformer;
@@ -21,7 +20,6 @@ use Go\Instrument\Transformer\WeavingTransformer;
 use Go\Instrument\Transformer\CachingTransformer;
 use Go\Instrument\Transformer\FilterInjectorTransformer;
 use Go\Instrument\Transformer\MagicConstantTransformer;
-use TokenReflection;
 
 /**
  * Abstract aspect kernel is used to prepare an application to work with aspects.
@@ -32,7 +30,7 @@ abstract class AspectKernel
     /**
      * Version of kernel
      */
-    const VERSION = '1.0.0';
+    const VERSION = '2.1.0';
 
     /**
      * Kernel options
@@ -141,21 +139,6 @@ abstract class AspectKernel
     }
 
     /**
-     * Returns a default bit mask of features by checking PHP version
-     *
-     * @return int
-     */
-    public static function getDefaultFeatures()
-    {
-        $features = 0;
-        if (PHP_VERSION_ID >= 50600) {
-            $features += Features::USE_SPLAT_OPERATOR;
-        }
-
-        return $features;
-    }
-
-    /**
      * Checks if kernel configuration has enabled specific feature
      *
      * @param integer $featureToCheck See Go\Aop\Features enumeration class for features
@@ -192,14 +175,12 @@ abstract class AspectKernel
      */
     protected function getDefaultOptions()
     {
-        $features = static::getDefaultFeatures();
-
         return array(
             'debug'                  => false,
             'appDir'                 => __DIR__ . '/../../../../../',
             'cacheDir'               => null,
             'cacheFileMode'          => 0770 & ~umask(), // Respect user umask() policy
-            'features'               => $features,
+            'features'               => 0,
 
             'includePaths'           => [],
             'excludePaths'           => [],
@@ -258,9 +239,6 @@ abstract class AspectKernel
             $aspectContainer = $aspectKernel->getContainer();
             $transformers[]  = new WeavingTransformer(
                 $aspectKernel,
-                new TokenReflection\Broker(
-                    new CleanableMemory()
-                ),
                 $aspectContainer->get('aspect.advice_matcher'),
                 $cacheManager,
                 $aspectContainer->get('aspect.cached.loader')

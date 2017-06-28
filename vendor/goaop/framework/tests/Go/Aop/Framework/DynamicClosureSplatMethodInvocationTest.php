@@ -14,16 +14,7 @@ class DynamicClosureSplatMethodInvocationTest extends \PHPUnit_Framework_TestCas
 
     const FIRST_CLASS_NAME = First::class;
 
-    protected static $invocationClass;
-
-    public static function setUpBeforeClass()
-    {
-        parent::setUpBeforeClass();
-        // Add version check to prevent fatals
-        if (PHP_VERSION_ID >= 50600) {
-            self::$invocationClass = MethodInvocationComposer::compose(false, true, false);
-        }
-    }
+    protected static $invocationClass = DynamicClosureMethodInvocation::class;
 
     /**
      * {@inheritdoc}
@@ -32,9 +23,6 @@ class DynamicClosureSplatMethodInvocationTest extends \PHPUnit_Framework_TestCas
     {
         if (PHP_VERSION_ID < 50600) {
             $this->markTestSkipped("Closure Method Invocation with splat works only on PHP 5.6 and greater");
-        }
-        if (defined('HHVM_VERSION')) {
-            $this->markTestSkipped("Skipped due to the bug https://github.com/facebook/hhvm/issues/1203");
         }
     }
 
@@ -67,6 +55,21 @@ class DynamicClosureSplatMethodInvocationTest extends \PHPUnit_Framework_TestCas
     {
         $child      = $this->getMock(self::FIRST_CLASS_NAME, array('none'));
         $invocation = new self::$invocationClass(self::FIRST_CLASS_NAME, 'variableArgsTest', []);
+
+        $args     = [];
+        $expected = '';
+        for ($i=0; $i<10; $i++) {
+            $args[]   = $i;
+            $expected .= $i;
+            $result   = $invocation($child, $args);
+            $this->assertEquals($expected, $result);
+        }
+    }
+
+    public function testInvocationWithVariadicArguments()
+    {
+        $child      = $this->getMock(self::FIRST_CLASS_NAME, array('none'));
+        $invocation = new self::$invocationClass(self::FIRST_CLASS_NAME, 'variadicArgsTest', []);
 
         $args     = [];
         $expected = '';

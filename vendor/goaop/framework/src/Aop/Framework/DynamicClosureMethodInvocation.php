@@ -10,7 +10,10 @@
 
 namespace Go\Aop\Framework;
 
-class DynamicClosureMethodInvocation extends AbstractMethodInvocation
+/**
+ * Dynamic closure method invocation is responsible to call dynamic methods via closure
+ */
+final class DynamicClosureMethodInvocation extends AbstractMethodInvocation
 {
     /**
      * Closure to use
@@ -20,7 +23,7 @@ class DynamicClosureMethodInvocation extends AbstractMethodInvocation
     protected $closureToCall = null;
 
     /**
-     * Previous instance/scope of invocation
+     * Previous instance of invocation
      *
      * @var null|object|string
      */
@@ -41,8 +44,9 @@ class DynamicClosureMethodInvocation extends AbstractMethodInvocation
         }
 
         // Fill the closure only once if it's empty
-        if (!$this->closureToCall) {
-            $this->closureToCall = $this->reflectionMethod->getClosure($this->instance);
+        if ($this->closureToCall === null) {
+            $this->closureToCall    = $this->reflectionMethod->getClosure($this->instance);
+            $this->previousInstance = $this->instance;
         }
 
         // Rebind the closure if instance was changed since last time
@@ -52,57 +56,7 @@ class DynamicClosureMethodInvocation extends AbstractMethodInvocation
         }
 
         $closureToCall = $this->closureToCall;
-        $args          = $this->arguments;
 
-        switch (count($args)) {
-            case 0:
-                return $closureToCall();
-            case 1:
-                return $closureToCall($args[0]);
-            case 2:
-                return $closureToCall($args[0], $args[1]);
-            case 3:
-                return $closureToCall($args[0], $args[1], $args[2]);
-            case 4:
-                return $closureToCall($args[0], $args[1], $args[2], $args[3]);
-            case 5:
-                return $closureToCall($args[0], $args[1], $args[2], $args[3], $args[4]);
-            default:
-                return forward_static_call_array($closureToCall, $args);
-        }
-
-    }
-
-    /**
-     * Invokes current method invocation with all interceptors
-     *
-     * @param null|object|string $instance Invocation instance (class name for static methods)
-     * @param array $arguments List of arguments for method invocation
-     *
-     * @return mixed Result of invocation
-     */
-    final public function __invoke($instance = null, array $arguments = [])
-    {
-        if ($this->level) {
-            $this->stackFrames[] = [$this->arguments, $this->instance, $this->current];
-        }
-
-        try {
-            ++$this->level;
-
-            $this->current   = 0;
-            $this->instance  = $instance;
-            $this->arguments = $arguments;
-
-            $result = $this->proceed();
-        } finally {
-            --$this->level;
-        }
-
-        if ($this->level) {
-            list($this->arguments, $this->instance, $this->current) = array_pop($this->stackFrames);
-        }
-
-        return $result;
+        return $closureToCall(...$this->arguments);
     }
 }

@@ -10,11 +10,10 @@
 
 namespace Go\Proxy;
 
-use Go\Aop\Features;
 use Go\Core\AspectContainer;
 use Go\Core\AspectKernel;
 use Go\Core\LazyAdvisorAccessor;
-use TokenReflection\ReflectionMethod as ParsedMethod;
+use ReflectionMethod;
 
 /**
  * Trait proxy builder that is used to generate a trait from the list of joinpoints
@@ -28,13 +27,6 @@ class TraitProxy extends ClassProxy
      * @var array
      */
     protected static $traitAdvices = [];
-
-    /**
-     * Overridden static property for TraitProxy
-     *
-     * {@inheritDoc}
-     */
-    protected static $invocationClassMap = [];
 
     /**
      * Inject advices for given trait
@@ -56,12 +48,9 @@ class TraitProxy extends ClassProxy
         /** @var LazyAdvisorAccessor $accessor */
         static $accessor = null;
 
-        if (empty(self::$invocationClassMap)) {
+        if (!isset($accessor)) {
             $aspectKernel = AspectKernel::getInstance();
             $accessor     = $aspectKernel->getContainer()->get('aspect.advisor.accessor');
-            self::setMappings(
-                $aspectKernel->hasFeature(Features::USE_SPLAT_OPERATOR)
-            );
         }
 
         $advices = self::$traitAdvices[$traitName][$joinPointType][$pointName];
@@ -79,11 +68,11 @@ class TraitProxy extends ClassProxy
     /**
      * Creates definition for trait method body
      *
-     * @param ParsedMethod $method Method reflection
+     * @param ReflectionMethod $method Method reflection
      *
      * @return string new method body
      */
-    protected function getJoinpointInvocationBody(ParsedMethod $method)
+    protected function getJoinpointInvocationBody(ReflectionMethod $method)
     {
         $isStatic = $method->isStatic();
         $class    = '\\' . __CLASS__;
@@ -91,14 +80,23 @@ class TraitProxy extends ClassProxy
         $prefix   = $isStatic ? AspectContainer::STATIC_METHOD_PREFIX : AspectContainer::METHOD_PREFIX;
 
         $args = $this->prepareArgsLine($method);
-        $args = $scope . ($args ? ", [$args]" : '');
+        $args = $scope . ($args ? ", $args" : '');
+
+        $return = 'return ';
+        if (PHP_VERSION_ID >= 70100 && $method->hasReturnType()) {
+            $returnType = (string) $method->getReturnType();
+            if ($returnType === 'void') {
+                // void return types should not return anything
+                $return = '';
+            }
+        }
 
         return <<<BODY
 static \$__joinPoint = null;
 if (!\$__joinPoint) {
     \$__joinPoint = {$class}::getJoinPoint(__TRAIT__, __CLASS__, '{$prefix}', '{$method->name}');
 }
-return \$__joinPoint->__invoke($args);
+{$return}\$__joinPoint->__invoke($args);
 BODY;
     }
 

@@ -11,8 +11,6 @@
 namespace Go\Aop\Framework;
 
 use Go\Aop\Intercept\Joinpoint;
-use ReflectionMethod;
-use ReflectionProperty;
 
 /**
  * Interceptor to dynamically trigger an user notice/warning/error on method call
@@ -113,7 +111,6 @@ class DeclareErrorInterceptor extends BaseInterceptor
      */
     public function invoke(Joinpoint $joinpoint)
     {
-        /** @var ReflectionMethod|ReflectionProperty $reflection */
         $reflection    = $joinpoint->getStaticPart();
         $reflectorName = 'unknown';
         if ($reflection && method_exists($reflection, 'getName')) {

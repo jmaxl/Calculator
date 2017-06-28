@@ -12,6 +12,7 @@ namespace Go\Instrument\ClassLoading;
 
 use Go\Core\AspectContainer;
 use Go\Instrument\FileSystem\Enumerator;
+use Go\Instrument\PathResolver;
 use Go\Instrument\Transformer\FilterInjectorTransformer;
 use Composer\Autoload\ClassLoader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
@@ -77,9 +78,6 @@ class AopComposerLoader
             if (isset($prefixes['Dissect'])) {
                 $excludePaths[] = $prefixes['Dissect'][0];
             }
-            if (isset($prefixes['TokenReflection'])) {
-                $excludePaths[] = $prefixes['TokenReflection'][0];
-            }
             if (isset($prefixes['Doctrine\\Common\\Annotations\\'])) {
                 $excludePaths[] = substr($prefixes['Doctrine\\Common\\Annotations\\'][0], 0, -16);
             }
@@ -108,7 +106,6 @@ class AopComposerLoader
             $loaderToUnregister = $loader;
             if (is_array($loader) && ($loader[0] instanceof ClassLoader)) {
                 $originalLoader = $loader[0];
-
                 // Configure library loader for doctrine annotation loader
                 AnnotationRegistry::registerLoader(function($class) use ($originalLoader) {
                     $originalLoader->loadClass($class);
@@ -142,7 +139,11 @@ class AopComposerLoader
     }
 
     /**
-     * {@inheritDoc}
+     * Finds either the path to the file where the class is defined,
+     * or gets the appropriate php://filter stream for the given class.
+     *
+     * @param string $class
+     * @return string|false The path/resource if found, false otherwise.
      */
     public function findFile($class)
     {
@@ -155,6 +156,7 @@ class AopComposerLoader
         $file = $this->original->findFile($class);
 
         if ($file) {
+            $file = PathResolver::realpath($file)?:$file;
             $cacheState = isset($this->cacheState[$file]) ? $this->cacheState[$file] : null;
             if ($cacheState && $isProduction) {
                 $file = $cacheState['cacheUri'] ?: $file;

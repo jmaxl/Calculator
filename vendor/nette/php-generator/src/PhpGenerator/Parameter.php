@@ -5,6 +5,8 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 
+declare(strict_types=1);
+
 namespace Nette\PhpGenerator;
 
 use Nette;
@@ -12,11 +14,13 @@ use Nette;
 
 /**
  * Method parameter description.
+ *
+ * @property mixed $defaultValue
  */
-class Parameter extends Nette\Object
+final class Parameter
 {
-	/** @var string */
-	private $name = '';
+	use Nette\SmartObject;
+	use Traits\NameAware;
 
 	/** @var bool */
 	private $reference = FALSE;
@@ -25,86 +29,26 @@ class Parameter extends Nette\Object
 	private $typeHint;
 
 	/** @var bool */
-	private $optional = FALSE;
+	private $nullable = FALSE;
+
+	/** @var bool */
+	private $hasDefaultValue = FALSE;
 
 	/** @var mixed */
-	public $defaultValue;
+	private $defaultValue;
 
 
 	/**
-	 * @return self
+	 * @return static
 	 */
-	public static function from(\ReflectionParameter $from)
+	public function setReference(bool $state = TRUE): self
 	{
-		$param = new static($from->getName());
-		$param->reference = $from->isPassedByReference();
-		if (PHP_VERSION_ID >= 70000) {
-			$param->typeHint = $from->hasType() ? (string) $from->getType() : NULL;
-		} elseif ($from->isArray()) {
-			$param->typeHint = 'array';
-		} elseif (PHP_VERSION_ID >= 50400 && $from->isCallable()) {
-			$param->typeHint = 'callable';
-		} else {
-			try {
-				$param->typeHint = $from->getClass() ? $from->getClass()->getName() : NULL;
-			} catch (\ReflectionException $e) {
-				if (preg_match('#Class (.+) does not exist#', $e->getMessage(), $m)) {
-					$param->typeHint = $m[1];
-				} else {
-					throw $e;
-				}
-			}
-		}
-		$param->optional = PHP_VERSION_ID < 50407 ? $from->isOptional() || ($param->typeHint && $from->allowsNull()) : $from->isDefaultValueAvailable();
-		$param->defaultValue = (PHP_VERSION_ID === 50316 ? $from->isOptional() : $from->isDefaultValueAvailable()) ? $from->getDefaultValue() : NULL;
-		return $param;
-	}
-
-
-	/**
-	 * @param  string  without $
-	 */
-	public function __construct($name = '')
-	{
-		$this->setName($name);
-	}
-
-
-	/**
-	 * @param  string  without $
-	 * @return self
-	 */
-	public function setName($name)
-	{
-		$this->name = (string) $name;
+		$this->reference = $state;
 		return $this;
 	}
 
 
-	/**
-	 * @return string
-	 */
-	public function getName()
-	{
-		return $this->name;
-	}
-
-
-	/**
-	 * @param  bool
-	 * @return self
-	 */
-	public function setReference($state = TRUE)
-	{
-		$this->reference = (bool) $state;
-		return $this;
-	}
-
-
-	/**
-	 * @return bool
-	 */
-	public function isReference()
+	public function isReference(): bool
 	{
 		return $this->reference;
 	}
@@ -112,9 +56,9 @@ class Parameter extends Nette\Object
 
 	/**
 	 * @param  string|NULL
-	 * @return self
+	 * @return static
 	 */
-	public function setTypeHint($hint)
+	public function setTypeHint($hint): self
 	{
 		$this->typeHint = $hint ? (string) $hint : NULL;
 		return $this;
@@ -131,41 +75,62 @@ class Parameter extends Nette\Object
 
 
 	/**
-	 * @param  bool
-	 * @return self
+	 * @deprecated  just use setDefaultValue()
+	 * @return static
 	 */
-	public function setOptional($state = TRUE)
+	public function setOptional(bool $state = TRUE): self
 	{
-		$this->optional = (bool) $state;
+		$this->hasDefaultValue = $state;
 		return $this;
 	}
 
 
 	/**
-	 * @return bool
+	 * @deprecated  use hasDefaultValue()
 	 */
-	public function isOptional()
+	public function isOptional(): bool
 	{
-		return $this->optional;
+		trigger_error(__METHOD__ . '() is deprecated, use hasDefaultValue()', E_USER_DEPRECATED);
+		return $this->hasDefaultValue;
 	}
 
 
 	/**
-	 * @return self
+	 * @return static
 	 */
-	public function setDefaultValue($val)
+	public function setNullable(bool $state = TRUE): self
+	{
+		$this->nullable = $state;
+		return $this;
+	}
+
+
+	public function isNullable(): bool
+	{
+		return $this->nullable;
+	}
+
+
+	/**
+	 * @return static
+	 */
+	public function setDefaultValue($val): self
 	{
 		$this->defaultValue = $val;
+		$this->hasDefaultValue = TRUE;
 		return $this;
 	}
 
 
-	/**
-	 * @return mixed
-	 */
 	public function getDefaultValue()
 	{
 		return $this->defaultValue;
+	}
+
+
+	public function hasDefaultValue(): bool
+	{
+		return $this->hasDefaultValue;
 	}
 
 }

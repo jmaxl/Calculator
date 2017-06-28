@@ -14,13 +14,15 @@ use Nette\Caching\Cache;
 /**
  * SQLite storage.
  */
-class SQLiteStorage extends Nette\Object implements Nette\Caching\IStorage
+class SQLiteStorage implements Nette\Caching\IStorage, Nette\Caching\IBulkReader
 {
+	use Nette\SmartObject;
+
 	/** @var \PDO */
 	private $pdo;
 
 
-	public function __construct($path = ':memory:')
+	public function __construct($path)
 	{
 		if ($path !== ':memory:' && !is_file($path)) {
 			touch($path); // ensures ordinary file permissions
@@ -50,8 +52,8 @@ class SQLiteStorage extends Nette\Object implements Nette\Caching\IStorage
 
 	/**
 	 * Read from cache.
-	 * @param  string key
-	 * @return mixed|NULL
+	 * @param  string
+	 * @return mixed
 	 */
 	public function read($key)
 	{
@@ -67,8 +69,33 @@ class SQLiteStorage extends Nette\Object implements Nette\Caching\IStorage
 
 
 	/**
+	 * Reads from cache in bulk.
+	 * @param  string
+	 * @return array key => value pairs, missing items are omitted
+	 */
+	public function bulkRead(array $keys)
+	{
+		$stmt = $this->pdo->prepare('SELECT key, data, slide FROM cache WHERE key IN (?' . str_repeat(',?', count($keys) - 1) . ') AND (expire IS NULL OR expire >= ?)');
+		$stmt->execute(array_merge($keys, [time()]));
+		$result = [];
+		$updateSlide = [];
+		foreach ($stmt->fetchAll(\PDO::FETCH_ASSOC) as $row) {
+			if ($row['slide'] !== NULL) {
+				$updateSlide[] = $row['key'];
+			}
+			$result[$row['key']] = unserialize($row['data']);
+		}
+		if (!empty($updateSlide)) {
+			$stmt = $this->pdo->prepare('UPDATE cache SET expire = ? + slide WHERE key IN(?' . str_repeat(',?', count($updateSlide) - 1) . ')');
+			$stmt->execute(array_merge([time()], $updateSlide));
+		}
+		return $result;
+	}
+
+
+	/**
 	 * Prevents item reading and writing. Lock is released by write() or remove().
-	 * @param  string key
+	 * @param  string
 	 * @return void
 	 */
 	public function lock($key)
@@ -78,9 +105,8 @@ class SQLiteStorage extends Nette\Object implements Nette\Caching\IStorage
 
 	/**
 	 * Writes item into the cache.
-	 * @param  string key
-	 * @param  mixed  data
-	 * @param  array  dependencies
+	 * @param  string
+	 * @param  mixed
 	 * @return void
 	 */
 	public function write($key, $data, array $dependencies)
@@ -106,7 +132,7 @@ class SQLiteStorage extends Nette\Object implements Nette\Caching\IStorage
 
 	/**
 	 * Removes item from the cache.
-	 * @param  string key
+	 * @param  string
 	 * @return void
 	 */
 	public function remove($key)

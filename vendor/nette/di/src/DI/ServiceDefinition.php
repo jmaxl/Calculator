@@ -12,12 +12,18 @@ use Nette;
 
 /**
  * Definition used by ContainerBuilder.
+ *
+ * @property string|NULL $class
+ * @property Statement|NULL $factory
+ * @property Statement[] $setup
  */
-class ServiceDefinition extends Nette\Object
+class ServiceDefinition
 {
 	const
 		IMPLEMENT_MODE_CREATE = 'create',
 		IMPLEMENT_MODE_GET = 'get';
+
+	use Nette\SmartObject;
 
 	/** @var string|NULL  class or interface name */
 	private $class;
@@ -26,15 +32,15 @@ class ServiceDefinition extends Nette\Object
 	private $factory;
 
 	/** @var Statement[] */
-	private $setup = array();
+	private $setup = [];
 
 	/** @var array */
-	public $parameters = array();
+	public $parameters = [];
 
 	/** @var array */
-	private $tags = array();
+	private $tags = [];
 
-	/** @var bool */
+	/** @var bool|string[] */
 	private $autowired = TRUE;
 
 	/** @var bool */
@@ -46,13 +52,17 @@ class ServiceDefinition extends Nette\Object
 	/** @var string|NULL  create | get */
 	private $implementMode;
 
+	/** @var callable */
+	private $notifier = 'pi'; // = noop
+
 
 	/**
 	 * @return static
 	 */
-	public function setClass($class, array $args = array())
+	public function setClass($class, array $args = [])
 	{
-		$this->class = ltrim($class, '\\');
+		call_user_func($this->notifier);
+		$this->class = $class ? ltrim($class, '\\') : NULL;
 		if ($args) {
 			$this->setFactory($class, $args);
 		}
@@ -72,8 +82,9 @@ class ServiceDefinition extends Nette\Object
 	/**
 	 * @return static
 	 */
-	public function setFactory($factory, array $args = array())
+	public function setFactory($factory, array $args = [])
 	{
+		call_user_func($this->notifier);
 		$this->factory = $factory instanceof Statement ? $factory : new Statement($factory, $args);
 		return $this;
 	}
@@ -100,7 +111,7 @@ class ServiceDefinition extends Nette\Object
 	/**
 	 * @return static
 	 */
-	public function setArguments(array $args = array())
+	public function setArguments(array $args = [])
 	{
 		if (!$this->factory) {
 			$this->factory = new Statement($this->class);
@@ -138,7 +149,7 @@ class ServiceDefinition extends Nette\Object
 	/**
 	 * @return static
 	 */
-	public function addSetup($entity, array $args = array())
+	public function addSetup($entity, array $args = [])
 	{
 		$this->setup[] = $entity instanceof Statement ? $entity : new Statement($entity, $args);
 		return $this;
@@ -203,20 +214,30 @@ class ServiceDefinition extends Nette\Object
 
 
 	/**
-	 * @param  bool
+	 * @param  bool|string|string[]
 	 * @return static
 	 */
 	public function setAutowired($state = TRUE)
 	{
-		$this->autowired = (bool) $state;
+		call_user_func($this->notifier);
+		$this->autowired = is_string($state) || is_array($state) ? (array) $state : (bool) $state;
 		return $this;
 	}
 
 
 	/**
-	 * @return bool
+	 * @return bool|string[]
 	 */
 	public function isAutowired()
+	{
+		return $this->autowired;
+	}
+
+
+	/**
+	 * @return bool|string[]
+	 */
+	public function getAutowired()
 	{
 		return $this->autowired;
 	}
@@ -248,6 +269,7 @@ class ServiceDefinition extends Nette\Object
 	 */
 	public function setImplement($interface)
 	{
+		call_user_func($this->notifier);
 		$this->implement = ltrim($interface, '\\');
 		return $this;
 	}
@@ -268,7 +290,7 @@ class ServiceDefinition extends Nette\Object
 	 */
 	public function setImplementMode($mode)
 	{
-		if (!in_array($mode, array(self::IMPLEMENT_MODE_CREATE, self::IMPLEMENT_MODE_GET), TRUE)) {
+		if (!in_array($mode, [self::IMPLEMENT_MODE_CREATE, self::IMPLEMENT_MODE_GET], TRUE)) {
 			throw new Nette\InvalidArgumentException('Argument must be get|create.');
 		}
 		$this->implementMode = $mode;
@@ -288,6 +310,7 @@ class ServiceDefinition extends Nette\Object
 	/** @deprecated */
 	public function setImplementType($type)
 	{
+		trigger_error(__METHOD__ . '() is deprecated, use setImplementMode()', E_USER_DEPRECATED);
 		return $this->setImplementMode($type);
 	}
 
@@ -295,23 +318,8 @@ class ServiceDefinition extends Nette\Object
 	/** @deprecated */
 	public function getImplementType()
 	{
+		trigger_error(__METHOD__ . '() is deprecated, use getImplementMode()', E_USER_DEPRECATED);
 		return $this->implementMode;
-	}
-
-
-	/** @deprecated */
-	public function setShared($on)
-	{
-		trigger_error(__METHOD__ . '() is deprecated.', E_USER_DEPRECATED);
-		$this->autowired = $on ? $this->autowired : FALSE;
-		return $this;
-	}
-
-
-	/** @deprecated */
-	public function isShared()
-	{
-		trigger_error(__METHOD__ . '() is deprecated.', E_USER_DEPRECATED);
 	}
 
 
@@ -328,6 +336,23 @@ class ServiceDefinition extends Nette\Object
 	{
 		//trigger_error(__METHOD__ . '() is deprecated.', E_USER_DEPRECATED);
 		return $this->getTag(Extensions\InjectExtension::TAG_INJECT);
+	}
+
+
+	/**
+	 * @internal
+	 */
+	public function setNotifier(callable $notifier)
+	{
+		$this->notifier = $notifier;
+	}
+
+
+	public function __clone()
+	{
+		$this->factory = unserialize(serialize($this->factory));
+		$this->setup = unserialize(serialize($this->setup));
+		$this->notifier = 'pi';
 	}
 
 }

@@ -10,9 +10,10 @@
 
 namespace Go\Proxy;
 
-use ReflectionParameter as Parameter;
-use TokenReflection\ReflectionMethod as ParsedMethod;
-use TokenReflection\ReflectionParameter as ParsedParameter;
+use Reflection;
+use ReflectionFunctionAbstract;
+use ReflectionMethod;
+use ReflectionParameter;
 
 /**
  * Abstract class for building different proxies
@@ -42,22 +43,13 @@ abstract class AbstractProxy
     protected static $staticLsbExpression = 'static::class';
 
     /**
-     * Should proxy use variadics support or not
-     *
-     * @var bool
-     */
-    protected $useVariadics = false;
-
-    /**
      * Constructs an abstract proxy class
      *
      * @param array $advices List of advices
-     * @param bool $useVariadics Should proxy use variadics syntax or not
      */
-    public function __construct(array $advices = [], $useVariadics = false)
+    public function __construct(array $advices = [])
     {
-        $this->advices      = $this->flattenAdvices($advices);
-        $this->useVariadics = $useVariadics;
+        $this->advices = $this->flattenAdvices($advices);
     }
 
     /**
@@ -87,7 +79,7 @@ abstract class AbstractProxy
     /**
      * Returns list of string representation of parameters
      *
-     * @param array|Parameter[]|ParsedParameter[] $parameters List of parameters
+     * @param array|ReflectionParameter[] $parameters List of parameters
      *
      * @return array
      */
@@ -95,10 +87,6 @@ abstract class AbstractProxy
     {
         $parameterDefinitions = [];
         foreach ($parameters as $parameter) {
-            // Deprecated since PHP5.6 in the favor of variadics, needed for BC only
-            if ($parameter->name == '...') {
-                continue;
-            }
             $parameterDefinitions[] = $this->getParameterCode($parameter);
         }
 
@@ -108,35 +96,40 @@ abstract class AbstractProxy
     /**
      * Return string representation of parameter
      *
-     * @param Parameter|ParsedParameter $parameter Reflection parameter
+     * @param ReflectionParameter $parameter Reflection parameter
      *
      * @return string
      */
-    protected function getParameterCode($parameter)
+    protected function getParameterCode(ReflectionParameter $parameter)
     {
         $type = '';
-        if ($parameter->isArray()) {
-            $type = 'array';
-        } elseif ($parameter->isCallable()) {
-            $type = 'callable';
-        } elseif ($parameter->getClass()) {
-            $type = '\\' . $parameter->getClass()->name;
+        if (PHP_VERSION_ID >= 70000) {
+            $reflectionType = $parameter->getType();
+            if ($reflectionType) {
+                $nullablePrefix = (PHP_VERSION_ID >= 70100 && $reflectionType->allowsNull()) ? '?' : '';
+                $nsPrefix       = $reflectionType->isBuiltin() ? '' : '\\';
+                $type           = $nullablePrefix . $nsPrefix . (string) $reflectionType;
+            }
+        } else {
+            if ($parameter->isArray()) {
+                $type = 'array';
+            } elseif ($parameter->isCallable()) {
+                $type = 'callable';
+            } elseif ($parameter->getClass()) {
+                $type = '\\' . $parameter->getClass()->name;
+            }
         }
         $defaultValue = null;
         $isDefaultValueAvailable = $parameter->isDefaultValueAvailable();
         if ($isDefaultValueAvailable) {
-            if ($parameter instanceof ParsedParameter) {
-                $defaultValue = $parameter->getDefaultValueDefinition();
-            } else {
-                $defaultValue = var_export($parameter->getDefaultValue(), true);
-            }
-        } elseif ($parameter->isOptional()) {
+            $defaultValue = var_export($parameter->getDefaultValue(), true);
+        } elseif ($parameter->isOptional() && !$parameter->isVariadic()) {
             $defaultValue = 'null';
         }
         $code = (
             ($type ? "$type " : '') . // Typehint
             ($parameter->isPassedByReference() ? '&' : '') . // By reference sign
-            ($this->useVariadics && $parameter->isVariadic() ? '...' : '') . // Variadic symbol
+            ($parameter->isVariadic() ? '...' : '') . // Variadic symbol
             '$' . // Variable symbol
             ($parameter->name) . // Name of the argument
             ($defaultValue !== null ? (" = " . $defaultValue) : '') // Default value if present
@@ -169,18 +162,77 @@ abstract class AbstractProxy
     /**
      * Prepares a line with args from the method definition
      *
-     * @param ParsedMethod $method
+     * @param ReflectionFunctionAbstract $functionLike
      *
      * @return string
      */
-    protected function prepareArgsLine(ParsedMethod $method)
+    protected function prepareArgsLine(ReflectionFunctionAbstract $functionLike)
     {
-        $args = join(', ', array_map(function(ParsedParameter $param) {
-            $byReference = $param->isPassedByReference() ? '&' : '';
+        $argumentsPart = [];
+        $arguments     = [];
+        $hasOptionals  = false;
 
-            return $byReference . '$' . $param->name;
-        }, $method->getParameters()));
+        foreach ($functionLike->getParameters() as $parameter) {
+            $byReference  = ($parameter->isPassedByReference() && !$parameter->isVariadic()) ? '&' : '';
+            $hasOptionals = $hasOptionals || $parameter->isOptional();
 
-        return $args;
+            $arguments[] = $byReference . '$' . $parameter->name;
+        }
+
+        $isVariadic = $functionLike->isVariadic();
+        if ($isVariadic) {
+            $argumentsPart[] = array_pop($arguments);
+        }
+        if (!empty($arguments)) {
+            // Unshifting to keep correct order
+            $argumentLine = '[' . join(', ', $arguments) . ']';
+            if ($hasOptionals) {
+                $argumentLine = "\\array_slice($argumentLine, 0, \\func_num_args())";
+            }
+            array_unshift($argumentsPart, $argumentLine);
+        }
+
+        return join(', ', $argumentsPart);
+    }
+
+    /**
+     * Creates a function code from Reflection
+     *
+     * @param ReflectionFunctionAbstract $functionLike Reflection for method
+     * @param string $body Body of method
+     *
+     * @return string
+     */
+    protected function getOverriddenFunction(ReflectionFunctionAbstract $functionLike, $body)
+    {
+        $reflectionReturnType = PHP_VERSION_ID >= 70000 ? $functionLike->getReturnType() : '';
+        $modifiersLine        = '';
+        if ($reflectionReturnType) {
+            $nullablePrefix = $reflectionReturnType->allowsNull() ? '?' : '';
+            $nsPrefix       = $reflectionReturnType->isBuiltin() ? '' : '\\';
+
+            $reflectionReturnType = $nullablePrefix . $nsPrefix . (string) $reflectionReturnType;
+        }
+        if ($functionLike instanceof ReflectionMethod) {
+            $modifiersLine = join(' ', Reflection::getModifierNames($functionLike->getModifiers()));
+        }
+
+        $code = (
+            preg_replace('/ {4}|\t/', '', $functionLike->getDocComment()) . "\n" . // Original Doc-block
+            $modifiersLine . // List of modifiers (for methods)
+            ' function ' . // 'function' keyword
+            ($functionLike->returnsReference() ? '&' : '') . // By reference symbol
+            $functionLike->name . // Name of the function
+            '(' . // Start of parameters list
+            join(', ', $this->getParameters($functionLike->getParameters())) . // List of parameters
+            ")" . // End of parameters list
+            ($reflectionReturnType ? " : $reflectionReturnType" : '') . // Return type, if present
+            "\n" .
+            "{\n" . // Start of method body
+            $this->indent($body) . "\n" . // Method body
+            "}\n" // End of method body
+        );
+
+        return $code;
     }
 }

@@ -6,12 +6,14 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    '7745382c92b7799bf1294b1f43023ba2' => $vendorDir . '/tracy/tracy/src/shortcuts.php',
     '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => $vendorDir . '/symfony/polyfill-mbstring/bootstrap.php',
     '1d1b89d124cc9cb8219922c9d5569199' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest.php',
-    '7745382c92b7799bf1294b1f43023ba2' => $vendorDir . '/tracy/tracy/src/shortcuts.php',
     'a1d067aa2e53d6b47171c03cfc0ea5be' => $vendorDir . '/nette/safe-stream/src/loader.php',
+    'e7a6fd2e7a869bb207158e9416bdd9b0' => $vendorDir . '/nette/application/src/compatibility.php',
     '742b7e606e92b28dd726e835467f413a' => $vendorDir . '/herrera-io/json/src/lib/json_version.php',
     'f0e9d233388e461ee3c460665eb265f0' => $vendorDir . '/herrera-io/phar-update/src/lib/constants.php',
     '9d08842a2aa0dc42ee93aa591835610d' => $vendorDir . '/kdyby/events/src/Doctrine/compatibility.php',
+    '950e8c5ec01dc90f029c243f73011631' => $vendorDir . '/goaop/parser-reflection/src/bootstrap.php',
     '5255c38a0faeba867671b61dfda6d864' => $vendorDir . '/paragonie/random_compat/lib/random.php',
 );

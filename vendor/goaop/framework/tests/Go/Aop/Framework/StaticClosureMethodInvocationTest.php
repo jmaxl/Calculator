@@ -13,24 +13,7 @@ class StaticClosureMethodInvocationTest extends \PHPUnit_Framework_TestCase
 
     const FIRST_CLASS_NAME = First::class;
 
-    protected static $invocationClass;
-
-    public static function setUpBeforeClass()
-    {
-        parent::setUpBeforeClass();
-        self::$invocationClass = MethodInvocationComposer::compose(true, false, false);
-
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp()
-    {
-        if (defined('HHVM_VERSION')) {
-            $this->markTestSkipped("Skipped due to the bug https://github.com/facebook/hhvm/issues/1203");
-        }
-    }
+    protected static $invocationClass = StaticClosureMethodInvocation::class;
 
     /**
      * Tests static method invocations with self
@@ -114,6 +97,21 @@ class StaticClosureMethodInvocationTest extends \PHPUnit_Framework_TestCase
     {
         $child      = $this->getMock(self::FIRST_CLASS_NAME, array('none'));
         $invocation = new self::$invocationClass(self::FIRST_CLASS_NAME, 'staticVariableArgsTest', []);
+
+        $args     = [];
+        $expected = '';
+        for ($i=0; $i<10; $i++) {
+            $args[]   = $i;
+            $expected .= $i;
+            $result   = $invocation($child, $args);
+            $this->assertEquals($expected, $result);
+        }
+    }
+
+    public function testInvocationWithVariadicArguments()
+    {
+        $child      = $this->getMock(self::FIRST_CLASS_NAME, array('none'));
+        $invocation = new self::$invocationClass(self::FIRST_CLASS_NAME, 'staticVariadicArgsTest', []);
 
         $args     = [];
         $expected = '';
