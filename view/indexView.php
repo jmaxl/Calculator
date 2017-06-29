@@ -15,9 +15,5 @@
   		<p>Zinsel<input type="text" name="rental"></p>
   		<input type="submit" name="submit" value="Senden">
   	</form>
-
-
-
-
   </body>
 </html>

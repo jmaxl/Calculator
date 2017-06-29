@@ -3,9 +3,9 @@
 namespace Calculator;
 
 require __DIR__ . '/vendor/autoload.php';
+
 use Calculator\Controller\IndexController;
 use Calculator\Controller\CalculateController;
-
 
 $loader = new \Twig_Loader_Filesystem(__DIR__ . '/templates');
 $twig = new \Twig_Environment($loader, array(
@@ -15,7 +15,7 @@ $twig = new \Twig_Environment($loader, array(
 $config = ['variable' => 'Hallo zusammen!'];
 
 echo $twig->render('basic.twig', $config);
-exit;
+
 
 if (isset($_GET['route']) === false) {
     $controller = new IndexController();
