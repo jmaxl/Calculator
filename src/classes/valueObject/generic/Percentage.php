@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types = 1);
 namespace Calculator\ValueObject\Generic;
 
@@ -16,16 +15,16 @@ abstract class Percentage
 
     abstract public static function fromValue($percentage);
 
-    protected static function ensurePercentageIsValid($percentage)
+    protected static function ensurePercentageIsValid($percentage): void
     {
-        if (is_float($percentage) === false and is_int($percentage) === false) {
-            throw new Exception("Bitte eine Zahl eingeben!", 1);
+        if (is_float($percentage) === false && is_int($percentage) === false) {
+            throw new \Exception('Bitte eine Zahl eingeben!', 1);
         }
     }
 
     protected static function convertPercentage($percentage, $delimeter = self::DELIMITER): float
     {
-        return $percentage = (float) round($percentage/100, $delimeter);
+        return (float) round($percentage/100, $delimeter);
     }
 
     public function getPercentage(): float

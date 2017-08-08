@@ -14,12 +14,12 @@ class UserFactory
 {
 	public function getUserByPostParameter(array $post): User
 	{
-		$surname = Surname::fromString($post["surname"]);
-		$firstname = Firstname::fromString($post["firstname"]);
-		$fixCosts = FixCosts::fromValue((float) $post["fixCosts"]);
-		$startCapital = StartCapital::fromValue((float) $post["startCapital"]);
-		$rental = Rental::fromValue((float) $post["rental"]);
-		$monthlyPayment = MonthlyPayment::fromValue((float) $post["monthlyPayment"]);
+		$surname = Surname::fromString($post['surname']);
+		$firstname = Firstname::fromString($post['firstname']);
+		$fixCosts = FixCosts::fromValue((float) $post['fixCosts']);
+		$startCapital = StartCapital::fromValue((float) $post['startCapital']);
+		$rental = Rental::fromValue((float) $post['rental']);
+		$monthlyPayment = MonthlyPayment::fromValue((float) $post['monthlyPayment']);
 		
 		return new User($surname, $firstname, $fixCosts, $startCapital, $rental, $monthlyPayment);
 	} 

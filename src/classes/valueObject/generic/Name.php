@@ -14,10 +14,10 @@ abstract class Name
 
 	abstract public static function fromString(string $name);
 
-	protected static function ensureNameIsValid(string $name)
+	protected static function ensureNameIsValid(string $name): void
 	{
 		if (strlen($name) < 2) {
-			throw new \Exception("Dieser name ist zu kurz!", 1);
+			throw new \Exception('Dieser name ist zu kurz!', 1);
 		}
 	}
 

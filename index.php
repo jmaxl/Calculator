@@ -3,18 +3,12 @@
 namespace Calculator;
 
 require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/config.php';
 
 use Calculator\Controller\IndexController;
 use Calculator\Controller\CalculateController;
+use Calculator\View\ViewRenderer;
 
-$loader = new \Twig_Loader_Filesystem(__DIR__ . '/templates');
-$twig = new \Twig_Environment($loader, array(
-    'cache' => __DIR__ . '/cache',
-));
-
-$config = ['variable' => 'Hallo zusammen!'];
-
-echo $twig->render('basic.twig', $config);
 
 
 if (isset($_GET['route']) === false) {

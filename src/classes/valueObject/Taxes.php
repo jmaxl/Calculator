@@ -8,19 +8,19 @@ class Taxes extends Percentage
 {
     const DELIMETER = 5;
 
-    public static function fromValue($taxes)
+    public static function fromValue($taxes): self
     {
         self::ensureTaxesIsValid($taxes);
         $taxes = parent::convertPercentage($taxes, self::DELIMETER);
         return new self($taxes);
     }
 
-    protected static function ensureTaxesIsValid($taxes)
+    protected static function ensureTaxesIsValid($taxes): void
     {
         parent::ensurePercentageIsValid($taxes);
 
         if ($taxes <= 0) {
-            throw new \Exception("Wenn die Steuern negativ sind, sind wir im Paradies!", 1);
+            throw new \Exception('Wenn die Steuern negativ sind, sind wir im Paradies!', 1);
         }
     }
 }

@@ -13,31 +13,23 @@ class MonthlyPayment extends Money
 		return new self($monthlyPayment);
 	}
 
-	protected static function ensureMonthlyPaymentIsValid($monthlyPayment)
+	protected static function ensureMonthlyPaymentIsValid($monthlyPayment): void
 	{
 		parent::ensureMoneyIsValid($monthlyPayment);
 
 		if ($monthlyPayment <= 0) {
-			throw new \Exception("Wer nichts einzahlt, der gewinnt auch nix!", 1);
+			throw new \Exception('Wer nichts einzahlt, der gewinnt auch nix!', 1);
 		}
 	}
 
 	public function isGreaterThan(MonthlyPayment $monthlyPayment): bool
     {
-        if ($this->getMoney() > $monthlyPayment->getMoney()) {
-            return true;
-        }
-
-        return false;
+        return $this->getMoney() > $monthlyPayment->getMoney();
     }
 
     public static function firstIsGreaterThanSecond(MonthlyPayment $monthlyPayment1, MonthlyPayment $monthlyPayment2): bool
     {
-        if ($monthlyPayment1->getMoney() > $monthlyPayment2->getMoney()) {
-            return true;
-        }
-
-        return false;
+        return $monthlyPayment1->getMoney() > $monthlyPayment2->getMoney();
     }
 }
 

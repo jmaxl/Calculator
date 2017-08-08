@@ -8,19 +8,19 @@ class Dynamic extends Percentage
 {
     const DELIMETER = 2;
 
-    public static function fromValue($dynamic)
+    public static function fromValue($dynamic): self
     {
         self::ensureDynamicIsValid($dynamic);
         $dynamic = parent::convertPercentage($dynamic, self::DELIMETER);
         return new self($dynamic);
     }
 
-    protected static function ensureDynamicIsValid($dynamic)
+    protected static function ensureDynamicIsValid($dynamic): void
     {
         parent::ensurePercentageIsValid($dynamic);
 
         if ($dynamic <= 0) {
-            throw new \Exception("Negative Dynamik ist Quatsch!", 1);
+            throw new \Exception('Negative Dynamik ist Quatsch!', 1);
         }
     }
 }

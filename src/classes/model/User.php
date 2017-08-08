@@ -1,6 +1,6 @@
 <?php
-
 declare(strict_types = 1);
+
 namespace Calculator\Model;
 
 use Calculator\ValueObject\Surname;
@@ -12,11 +12,22 @@ use Calculator\ValueObject\MonthlyPayment;
 
 class User 
 {
+    /** @var Surname $surname */
 	protected $surname;
+
+    /** @var Firstname $firstname */
 	protected $firstname;
+
+    /** @var FixCosts $fixCosts */
 	protected $fixCosts;
+
+    /** @var StartCapital $startCapital */
 	protected $startCapital;
+
+    /** @var Rental $rental */
 	protected $rental;
+
+    /** @var MonthlyPayment $monthlyPayment */
 	protected $monthlyPayment;
 
 	public function __construct(Surname $surname, Firstname $firstname, FixCosts $fixCosts, StartCapital $startCapital, Rental $rental, MonthlyPayment $monthlyPayment)
@@ -29,7 +40,7 @@ class User
 		$this->setMonthlyPayment($monthlyPayment);
 	}
 
-	protected function setSurname(Surname $surname)
+	protected function setSurname(Surname $surname): void
 	{
 		$this->surname = $surname;
 	}
@@ -39,7 +50,7 @@ class User
 		return $this->surname;
 	}
 
-	protected function setFirstname(Firstname $firstname)
+	protected function setFirstname(Firstname $firstname): void
 	{
 		$this->firstname = $firstname;
 	}
@@ -49,7 +60,7 @@ class User
 		return $this->firstname;
 	}
 
-	public function setFixCosts(FixCosts $fixCosts)
+	public function setFixCosts(FixCosts $fixCosts): void
 	{
 		$this->fixCosts = $fixCosts;
 	}
@@ -59,7 +70,7 @@ class User
 		return $this->fixCosts;
 	}
 	
-	public function setStartCapital(StartCapital $startCapital)
+	public function setStartCapital(StartCapital $startCapital): void
 	{
 		$this->startCapital = $startCapital;
 	}
@@ -69,7 +80,7 @@ class User
 		return $this->startCapital;
 	}
 
-	public function setRental(Rental $rental)
+	public function setRental(Rental $rental): void
 	{
 		$this->rental = $rental;
 	}
@@ -79,7 +90,7 @@ class User
 		return $this->rental;
 	}
 
-	public function setMonthlyPayment(MonthlyPayment $monthlyPayment)
+	public function setMonthlyPayment(MonthlyPayment $monthlyPayment): void
 	{
 		$this->monthlyPayment = $monthlyPayment;
 	}

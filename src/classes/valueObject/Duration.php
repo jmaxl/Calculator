@@ -19,20 +19,20 @@ class Duration
         return new self($duration);
     }
 
-    protected static function ensureDurationIsValid(int $duration)
+    protected static function ensureDurationIsValid($duration): void
     {
-        if (is_float($duration) === false and is_int($duration) === false) {
-            throw new \Exception("Bitte eine Zahl eingeben", 1);
+        if (is_float($duration) === false && is_int($duration) === false) {
+            throw new \Exception('Bitte eine Zahl eingeben', 1);
         }
 
         if ($duration <= 0) {
-            throw new \Exception("Was keine Dauer hat, existiert nicht!", 1);
+            throw new \Exception('Was keine Dauer hat, existiert nicht!', 1);
         }
     }
 
     protected static function convertDuration($duration): int
     {
-        return $duration = (int) ceil($duration * 12);
+        return (int) ceil($duration * 12);
     }
 
     public function getDuration(): int
@@ -42,6 +42,6 @@ class Duration
 
     public function __toString(): string
     {
-        return (string) number_format(ceil($this->duration / 12), 0, ",", ".");
+        return (string) number_format(ceil($this->duration / 12), 0, ',', '.');
     }
 }

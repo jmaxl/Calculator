@@ -22,6 +22,6 @@
         "ramsey/uuid": "3.6.1"
     },
     "autoload": {
-        "psr-4": {"Calculator\\": "src/Classes"}
+        "psr-4": {"Calculator\\": "src/classes"}
     }
 }

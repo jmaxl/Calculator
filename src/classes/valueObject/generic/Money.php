@@ -9,25 +9,25 @@ abstract class Money
 
 	protected function __construct(int $money)
 	{
-		$this->$money = $money;
+		$this->money = $money;
 	}
 
 	abstract public static function fromValue($money);
 
-	protected static function ensureMoneyIsValid($money)
+	protected static function ensureMoneyIsValid($money): void
 	{
 		if (is_float($money) === false && is_int($money) === false){
-			throw new \Exception("Bitte eine Zahl eingeben");
+			throw new \Exception('Bitte eine Zahl eingeben');
 		}
 		
 		if ($money < 0) {
-			throw new \Exception("Startkapital kann nicht negativ sein", 1);
+			throw new \Exception('Startkapital kann nicht negativ sein', 1);
 		}
 	}
 
 	protected static function convertMoney($money): int
 	{
-		$money = $money * 100;
+		$money *= 100;
 		$money = floor($money);
 		$money = (int)$money; 
 
@@ -41,6 +41,6 @@ abstract class Money
 
 	public function __toString(): string
 	{
-		return (string) number_format($this->money / 100, 2, ",", ".");
+		return (string) number_format($this->money / 100, 2, ',', '.');
 	}
 }

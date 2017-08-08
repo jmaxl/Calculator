@@ -14,12 +14,12 @@ class FixCosts extends Money
 		return new self($fixCosts);
 	}
 
-	protected static function ensureFixCostsIsValid($fixCosts)
+	protected static function ensureFixCostsIsValid($fixCosts): void
 	{
 		parent::ensureMoneyIsValid($fixCosts);
 
 		if ($fixCosts <= 0) {
-			throw new \Exception("Wer keine Fixkosten hat, der lebt nicht!", 1);
+			throw new \Exception('Wer keine Fixkosten hat, der lebt nicht!', 1);
 		}
 	}
 }
