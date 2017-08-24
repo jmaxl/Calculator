@@ -1,19 +1,20 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
+
 namespace Calculator\Controller;
 
 use Calculator\View\ViewRenderer;
 
 class IndexController
 {
-	public function indexAction()
-	{
+    const LANGUAGE = 'de';
+
+    public function indexAction()
+    {
         $template = 'basic.twig';
-
-        $variables = ['variable' => 'Hallo zusammen!123'];
-
+        $config = CONFIG[self::LANGUAGE];
         $renderer = new ViewRenderer();
-        $renderer->renderTemplate($template, $variables);
-	}
+        $renderer->renderTemplate($template, $config);
+    }
 }

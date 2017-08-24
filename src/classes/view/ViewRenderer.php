@@ -18,7 +18,7 @@ class ViewRenderer
     }
 
 
-    public function renderTemplate(string $template, array $config): void
+    public function renderTemplate(string $template, array $config = []): void
     {
         echo $this->viewRenderer->render($template, $config);
     }

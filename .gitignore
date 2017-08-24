@@ -3,3 +3,4 @@
 vendor/
 1/
 cache/
+composer.lock

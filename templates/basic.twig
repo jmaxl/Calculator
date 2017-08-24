@@ -6,8 +6,9 @@
     <title>Rechner der finanziellen Freiheit</title>
 </head>
 <body>
+<h1>{{ ansprache }}</h1>
 <form action="index.php?route=calculateFreedom" method="post" name="calculate-freedom-form">
-    <p>Name <input type="text" name="surname"></p>
+    <p>{{ name }} <input type="text" name="surname"></p>
     <p>Vorname <input type="text" name="firstname"></p>
     <p>Fixkosten <input type="text" name="fixCosts"></p>
     <p>Startkapital <input type="text" name="startCapital"></p>
