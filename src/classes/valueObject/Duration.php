@@ -19,6 +19,11 @@ class Duration
         return new self($duration);
     }
 
+    /**
+     * @todo hier ist ein BUG ... duration kann kein float sein, wenn wir in der fromValue nur int zulassen.
+     * @param $duration
+     * @throws \Exception
+     */
     protected static function ensureDurationIsValid($duration): void
     {
         if (is_float($duration) === false && is_int($duration) === false) {
