@@ -2,10 +2,14 @@
 return [
     'de' => [
         'ansprache' => 'Hallo',
-        'name' => 'Name'
+        'name' => 'Name',
+        'firstname' => 'Vorname',
+        'fixCosts' => 'Fixkosten'
     ],
     'en' => [
         'ansprache' => 'hello',
-        'name' => 'Surname'
+        'name' => 'surname',
+        'firstname' => 'firstname',
+        'fixCosts' => 'fixcosts'
     ]
 ];

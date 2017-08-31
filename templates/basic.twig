@@ -9,8 +9,8 @@
 <h1>{{ ansprache }}</h1>
 <form action="index.php?route=calculateFreedom" method="post" name="calculate-freedom-form">
     <p>{{ name }} <input type="text" name="surname"></p>
-    <p>Vorname <input type="text" name="firstname"></p>
-    <p>Fixkosten <input type="text" name="fixCosts"></p>
+    <p>{{ firstname }} <input type="text" name="firstname"></p>
+    <p>{{ fixCosts }} <input type="text" name="fixCosts"></p>
     <p>Startkapital <input type="text" name="startCapital"></p>
     <p>Monatsrate <input type="text" name="monthlyPayment"></p>
     <p>Zinsel<input type="text" name="rental"></p>

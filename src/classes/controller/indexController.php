@@ -8,7 +8,7 @@ use Calculator\View\ViewRenderer;
 
 class IndexController
 {
-    const LANGUAGE = 'de';
+    const LANGUAGE = 'en';
 
     public function indexAction()
     {
