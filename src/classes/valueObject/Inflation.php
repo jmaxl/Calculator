@@ -13,4 +13,9 @@ class Inflation extends Percentage
 
         return new self($inflation);
     }
+
+    public function getInflation(): float
+    {
+        return $this->getPercentage();
+    }
 }

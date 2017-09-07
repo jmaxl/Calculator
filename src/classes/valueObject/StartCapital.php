@@ -12,4 +12,9 @@ class StartCapital extends Money
 			$startCapital = parent::convertMoney($startCapital);
 			return new self($startCapital);
 	}
+
+	public function getStartCapital(): float
+    {
+        return $this->getMoney() / 100;
+    }
 }

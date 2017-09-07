@@ -22,4 +22,9 @@ class FixCosts extends Money
 			throw new \Exception('Wer keine Fixkosten hat, der lebt nicht!', 1);
 		}
 	}
+	
+	public function getFixCosts(): float 
+    {
+        return $this->getMoney() / 100;
+    }
 }

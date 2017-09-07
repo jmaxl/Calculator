@@ -13,11 +13,11 @@
     <orderEntry type="module-library">
       <library name="PHARS">
         <CLASSES>
-          <root url="phar://$MODULE_DIR$/../../xamppfiles/htdocs/calculator/vendor/twig/twig/test/Twig/Tests/Loader/Fixtures/phar/phar-sample.phar/" />
+          <root url="phar://$MODULE_DIR$/vendor/twig/twig/test/Twig/Tests/Loader/Fixtures/phar/phar-sample.phar/" />
           <root url="phar://$MODULE_DIR$/composer.phar/" />
         </CLASSES>
         <SOURCES>
-          <root url="phar://$MODULE_DIR$/../../xamppfiles/htdocs/calculator/vendor/twig/twig/test/Twig/Tests/Loader/Fixtures/phar/phar-sample.phar/" />
+          <root url="phar://$MODULE_DIR$/vendor/twig/twig/test/Twig/Tests/Loader/Fixtures/phar/phar-sample.phar/" />
           <root url="phar://$MODULE_DIR$/composer.phar/" />
         </SOURCES>
       </library>
@@ -25,18 +25,18 @@
     <orderEntry type="module-library">
       <library name="PHP" type="php">
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../../xamppfiles/htdocs/calculator/vendor/composer" />
-          <root url="file://$MODULE_DIR$/../../xamppfiles/htdocs/calculator/vendor/paragonie/random_compat" />
-          <root url="file://$MODULE_DIR$/../../xamppfiles/htdocs/calculator/vendor/ramsey/uuid" />
-          <root url="file://$MODULE_DIR$/../../xamppfiles/htdocs/calculator/vendor/symfony/polyfill-mbstring" />
-          <root url="file://$MODULE_DIR$/../../xamppfiles/htdocs/calculator/vendor/twig/twig" />
+          <root url="file://$MODULE_DIR$/vendor/composer" />
+          <root url="file://$MODULE_DIR$/vendor/paragonie/random_compat" />
+          <root url="file://$MODULE_DIR$/vendor/ramsey/uuid" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/polyfill-mbstring" />
+          <root url="file://$MODULE_DIR$/vendor/twig/twig" />
         </CLASSES>
         <SOURCES>
-          <root url="file://$MODULE_DIR$/../../xamppfiles/htdocs/calculator/vendor/composer" />
-          <root url="file://$MODULE_DIR$/../../xamppfiles/htdocs/calculator/vendor/paragonie/random_compat" />
-          <root url="file://$MODULE_DIR$/../../xamppfiles/htdocs/calculator/vendor/ramsey/uuid" />
-          <root url="file://$MODULE_DIR$/../../xamppfiles/htdocs/calculator/vendor/symfony/polyfill-mbstring" />
-          <root url="file://$MODULE_DIR$/../../xamppfiles/htdocs/calculator/vendor/twig/twig" />
+          <root url="file://$MODULE_DIR$/vendor/composer" />
+          <root url="file://$MODULE_DIR$/vendor/paragonie/random_compat" />
+          <root url="file://$MODULE_DIR$/vendor/ramsey/uuid" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/polyfill-mbstring" />
+          <root url="file://$MODULE_DIR$/vendor/twig/twig" />
         </SOURCES>
       </library>
     </orderEntry>

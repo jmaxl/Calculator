@@ -31,6 +31,11 @@ class MonthlyPayment extends Money
     {
         return $monthlyPayment1->getMoney() > $monthlyPayment2->getMoney();
     }
+
+    public function getMonthlyPayment(): float
+    {
+        return $this->getMoney() / 100;
+    }
 }
 
 

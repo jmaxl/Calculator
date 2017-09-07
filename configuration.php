@@ -19,5 +19,6 @@ return [
         'monthlypayment' => 'monthly payment',
         'rental' => 'rental',
         'post' => 'post'
-    ]
+    ],
+    'inflation' => 0
 ];
