@@ -4,12 +4,20 @@ return [
         'ansprache' => 'Hallo',
         'name' => 'Name',
         'firstname' => 'Vorname',
-        'fixCosts' => 'Fixkosten'
+        'fixcosts' => 'Fixkosten',
+        'startcapital' => 'Startkapital',
+        'monthlypayment' => 'Monatsrate',
+        'rental' => 'Zinsen',
+        'post' => 'senden'
     ],
     'en' => [
         'ansprache' => 'hello',
         'name' => 'surname',
         'firstname' => 'firstname',
-        'fixCosts' => 'fixcosts'
+        'fixcosts' => 'fixcosts',
+        'startcapital' => 'startcapital',
+        'monthlypayment' => 'monthly payment',
+        'rental' => 'rental',
+        'post' => 'post'
     ]
 ];

@@ -17,10 +17,11 @@ class CalculateController
 
         $calculateService = new Calculator();
         $savedMoneyPerYear = $calculateService->savedMoneyPerYear($user->getMonthlyPayment());
+        $calculateFreedom = $calculateService->calculateFreedom($user->getFixCosts(), $user->getMonthlyPayment(), $user->getStartCapital(), $user->getRental());
 
         $template = 'result.twig';
 
-        $variables = ['user' => $user, 'savedMoneyPerYear' => $savedMoneyPerYear];
+        $variables = ['user' => $user, 'savedMoneyPerYear' => $savedMoneyPerYear, 'calculateFreedom' => $calculateFreedom];
 
         $renderer = new ViewRenderer();
         $renderer->renderTemplate($template, $variables);

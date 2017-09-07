@@ -9,5 +9,5 @@ return array(
     'Twig\\' => array($vendorDir . '/twig/twig/src'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Ramsey\\Uuid\\' => array($vendorDir . '/ramsey/uuid/src'),
-    'Calculator\\' => array($baseDir . '/src/Classes'),
+    'Calculator\\' => array($baseDir . '/src/classes'),
 );
